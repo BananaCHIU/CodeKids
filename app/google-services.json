@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "656194707440",
+    "firebase_url": "https://codekids-61f51.firebaseio.com",
+    "project_id": "codekids-61f51",
+    "storage_bucket": "codekids-61f51.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:656194707440:android:28d43ca331fb935a",
+        "android_client_info": {
+          "package_name": "com.edu.codekids"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "656194707440-vbpfj1t16cfvnb0qbi4qa841ms7ol9g6.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.edu.codekids",
+            "certificate_hash": "aab32495efecd4d149804579f2109d15dacb04d6"
+          }
+        },
+        {
+          "client_id": "656194707440-r6l4600pav5rfn1i2hn6t0if93s6rs9o.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDqg9l_FuhN7JjhzK0kpRz0N0tyuPJajT0"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "656194707440-r6l4600pav5rfn1i2hn6t0if93s6rs9o.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
