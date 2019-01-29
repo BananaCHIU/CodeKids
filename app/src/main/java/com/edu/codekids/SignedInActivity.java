@@ -2,6 +2,7 @@ package com.edu.codekids;
 
 import android.content.Context;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 
 import com.firebase.ui.auth.IdpResponse;
@@ -12,6 +13,9 @@ import com.google.android.material.snackbar.Snackbar;
 import android.view.View;
 
 import com.google.android.material.navigation.NavigationView;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.auth.UserInfo;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -23,6 +27,7 @@ import androidx.appcompat.widget.Toolbar;
 
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.TextView;
 
 public class SignedInActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -31,10 +36,29 @@ public class SignedInActivity extends AppCompatActivity
         return new Intent().setClass(context, SignedInActivity.class)
                 .putExtra(ExtraConstants.IDP_RESPONSE, response);
     }
+
+    String uid,name,email;
+    Uri photoUrl;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_signed_in);
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        if (user != null) {
+            for (UserInfo profile : user.getProviderData()) {
+                // Id of the provider (ex: google.com)
+                String providerId = profile.getProviderId();
+
+                // UID specific to the provider
+                uid = profile.getUid();
+
+                // Name, email address, and profile photo Url
+                name = profile.getDisplayName();
+                email = profile.getEmail();
+                photoUrl = profile.getPhotoUrl();
+            }
+        }
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
@@ -55,6 +79,11 @@ public class SignedInActivity extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+        TextView uName = (TextView) navigationView.getHeaderView(0).findViewById(R.id.userName);
+        uName.setText(name);
+        TextView uEmail = (TextView) navigationView.getHeaderView(0).findViewById(R.id.userEmail);
+        uEmail.setText(email);
+
     }
 
     @Override
