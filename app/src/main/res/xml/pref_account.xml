@@ -1,6 +1,7 @@
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
     <Preference android:title="Sign Out"
-        android:key="sign_out" />
+        android:key="sign_out"
+        />
 
     <EditTextPreference
         android:id="@+id/del_account"

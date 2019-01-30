@@ -1,6 +1,7 @@
 package com.edu.codekids;
 
 import android.annotation.TargetApi;
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.Configuration;
@@ -24,6 +25,7 @@ import android.text.TextUtils;
 import android.view.MenuItem;
 
 import com.firebase.ui.auth.AuthUI;
+import com.google.android.gms.auth.api.Auth;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
@@ -132,6 +134,7 @@ public class SettingsActivity extends AppCompatPreferenceActivity{
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setupActionBar();
+        final Activity activity = this;
     }
 
     /**
@@ -197,11 +200,15 @@ public class SettingsActivity extends AppCompatPreferenceActivity{
             addPreferencesFromResource(R.xml.pref_account);
             setHasOptionsMenu(true);
             Preference button = findPreference("sign_out");
+
             button.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
                 @Override
                 public boolean onPreferenceClick(Preference preference) {
                     //code for what you want it to do
                     FirebaseAuth.getInstance().signOut();
+                    Intent intent = new Intent(getContext(), AuthActivity.class);
+                    preference.setIntent(intent);
+                    startActivity(intent);
                     return true;
                 }
             });
