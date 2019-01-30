@@ -23,6 +23,14 @@
           }
         },
         {
+          "client_id": "656194707440-trlfd9q4cjgn9las0p18q1tu6kluv4sk.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.edu.codekids",
+            "certificate_hash": "c212d65d9d89047ee7d8de9a1156127e4ed096af"
+          }
+        },
+        {
           "client_id": "656194707440-r6l4600pav5rfn1i2hn6t0if93s6rs9o.apps.googleusercontent.com",
           "client_type": 3
         }

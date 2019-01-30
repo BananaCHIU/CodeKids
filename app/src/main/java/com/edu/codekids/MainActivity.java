@@ -27,9 +27,11 @@ public class MainActivity extends AppCompatActivity {
         if (auth.getCurrentUser() != null) {
             // already signed in
             startActivity(new Intent(this, SignedInActivity.class));
+            finish();
         } else {
             // not signed in
             startActivity(new Intent(this, AuthActivity.class));
+            finish();
         }
 
     }
