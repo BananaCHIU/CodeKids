@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
 
@@ -18,6 +19,7 @@ import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.UserInfo;
+import com.squareup.picasso.Picasso;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -90,33 +92,13 @@ public class SignedInActivity extends AppCompatActivity
         uName.setText(name);
         TextView uEmail = (TextView) navigationView.getHeaderView(0).findViewById(R.id.userEmail);
         uEmail.setText(email);
+        ImageView uPhoto = (ImageView) navigationView.getHeaderView(0).findViewById(R.id.userImage);
         if (photoUrl!=null){
-            ImageView uPhoto = (ImageView) navigationView.getHeaderView(0).findViewById(R.id.userImage);
-            uPhoto.setImageBitmap(getBitmapfromUrl(photoUrl.toString()));
-        }
+            Picasso.with(this).load(photoUrl.toString()).into(uPhoto);
+        } else uPhoto.setImageResource(R.drawable.ic_person_white);
 
     }
 
-    public Bitmap getBitmapfromUrl(String imageUrl)
-    {
-        try
-        {
-            URL url = new URL(imageUrl);
-            HttpURLConnection connection = (HttpURLConnection) url.openConnection();
-            connection.setDoInput(true);
-            connection.connect();
-            InputStream input = connection.getInputStream();
-            Bitmap bitmap = BitmapFactory.decodeStream(input);
-            return bitmap;
-
-        } catch (Exception e)
-        {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-            return null;
-
-        }
-    }
     @Override
     public void onBackPressed() {
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
