@@ -3,9 +3,9 @@
     <!-- These settings headers are only used on tablets. -->
 
     <header
-        android:fragment="com.edu.codekids.SettingsActivity$GeneralPreferenceFragment"
-        android:icon="@drawable/ic_info_black_24dp"
-        android:title="@string/pref_header_general" />
+        android:fragment="com.edu.codekids.SettingsActivity$AccountPreferenceFragment"
+        android:icon="@drawable/ic_person_black"
+        android:title="@string/pref_header_account" />
 
     <header
         android:fragment="com.edu.codekids.SettingsActivity$NotificationPreferenceFragment"
