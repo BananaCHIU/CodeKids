@@ -117,10 +117,6 @@ public class SignedInActivity extends AppCompatActivity
 
         if (id == R.id.nav_setting) {
             startActivity(new Intent(this, SettingsActivity.class));
-        } else if (id == R.id.nav_share) {
-
-        } else if (id == R.id.nav_send) {
-
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
