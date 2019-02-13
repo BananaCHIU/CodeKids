@@ -92,6 +92,11 @@ public class SignedInActivity extends AppCompatActivity
             Picasso.with(this).load(photoUrl.toString()).into(uPhoto);
         } else uPhoto.setImageResource(R.drawable.ic_person_white);
 
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        HomeFragment fragment = new HomeFragment();
+        fragmentTransaction.replace(R.id.signedIn, fragment);
+        fragmentTransaction.commit();
     }
 
     @Override

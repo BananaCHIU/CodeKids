@@ -250,6 +250,7 @@ public class SettingsActivity extends AppCompatPreferenceActivity{
                                         // Deletion succeeded
                                         Toast.makeText(getActivity(), "Deletion Succeeded",
                                                 Toast.LENGTH_LONG).show();
+                                        FirebaseAuth.getInstance().signOut();
                                         Intent intent = new Intent(getContext(), AuthActivity.class);
                                         startActivity(intent);
                                         Log.d(TAG, "User account deleted.");
@@ -269,10 +270,16 @@ public class SettingsActivity extends AppCompatPreferenceActivity{
                 @Override
                 public boolean onPreferenceClick(Preference preference) {
                     //code for what you want it to do
-                    FirebaseAuth.getInstance().signOut();
-                    Intent intent = new Intent(getContext(), AuthActivity.class);
-                    preference.setIntent(intent);
-                    startActivity(intent);
+                    AuthUI.getInstance()
+                            .signOut(getContext())
+                            .addOnCompleteListener(new OnCompleteListener<Void>() {
+                                public void onComplete(@NonNull Task<Void> task) {
+                                    // user is now signed out
+                                    Intent intent = new Intent(getContext(), AuthActivity.class);
+                                    startActivity(intent);
+                                    Log.d(TAG, "User account sign out.");
+                                }
+                            });
                     return true;
                 }
             });
