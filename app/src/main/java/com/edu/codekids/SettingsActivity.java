@@ -18,7 +18,9 @@ import android.preference.RingtonePreference;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.MenuItem;
+import android.widget.Toast;
 
+import com.firebase.ui.auth.AuthUI;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
@@ -239,16 +241,22 @@ public class SettingsActivity extends AppCompatPreferenceActivity{
                 @Override
                 public boolean onPreferenceClick(Preference preference) {
                     //code for what you want it to do
-                    FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-                    user.delete()
+                    AuthUI.getInstance()
+                            .delete(getContext())
                             .addOnCompleteListener(new OnCompleteListener<Void>() {
                                 @Override
                                 public void onComplete(@NonNull Task<Void> task) {
                                     if (task.isSuccessful()) {
-                                        FirebaseAuth.getInstance().signOut();
+                                        // Deletion succeeded
+                                        Toast.makeText(getActivity(), "Deletion Succeeded",
+                                                Toast.LENGTH_LONG).show();
                                         Intent intent = new Intent(getContext(), AuthActivity.class);
                                         startActivity(intent);
                                         Log.d(TAG, "User account deleted.");
+                                    } else {
+                                        // Deletion failed
+                                        Toast.makeText(getActivity(), "Deletion Failed. Please Sign Out and Retry",
+                                                Toast.LENGTH_LONG).show();
                                     }
                                 }
                             });
