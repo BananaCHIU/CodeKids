@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 
+import com.edu.codekids.dummy.DummyContent;
 import com.firebase.ui.auth.IdpResponse;
 import com.firebase.ui.auth.util.ExtraConstants;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -34,7 +35,7 @@ import android.widget.TextView;
 
 
 public class SignedInActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener {
+        implements NavigationView.OnNavigationItemSelectedListener, JavaForumFragment.OnJavaFragmentInteractionListener, PascalForumFragment.OnPascalFragmentInteractionListener {
 
     public static Intent createIntent(@NonNull Context context, @Nullable IdpResponse response) {
         return new Intent().setClass(context, SignedInActivity.class)
@@ -134,5 +135,10 @@ public class SignedInActivity extends AppCompatActivity
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
+    }
+
+    @Override
+    public void onListFragmentInteraction(DummyContent.DummyItem item) {
+
     }
 }

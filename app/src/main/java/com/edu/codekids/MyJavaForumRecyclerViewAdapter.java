@@ -7,22 +7,22 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.edu.codekids.JavaForumFragment.OnListFragmentInteractionListener;
+import com.edu.codekids.JavaForumFragment.OnJavaFragmentInteractionListener;
 import com.edu.codekids.dummy.DummyContent.DummyItem;
 
 import java.util.List;
 
 /**
  * {@link RecyclerView.Adapter} that can display a {@link DummyItem} and makes a call to the
- * specified {@link OnListFragmentInteractionListener}.
+ * specified {@link OnJavaFragmentInteractionListener}.
  * TODO: Replace the implementation with code for your data type.
  */
 public class MyJavaForumRecyclerViewAdapter extends RecyclerView.Adapter<MyJavaForumRecyclerViewAdapter.ViewHolder> {
 
     private final List<DummyItem> mValues;
-    private final OnListFragmentInteractionListener mListener;
+    private final OnJavaFragmentInteractionListener mListener;
 
-    public MyJavaForumRecyclerViewAdapter(List<DummyItem> items, OnListFragmentInteractionListener listener) {
+    public MyJavaForumRecyclerViewAdapter(List<DummyItem> items, OnJavaFragmentInteractionListener listener) {
         mValues = items;
         mListener = listener;
     }

@@ -7,22 +7,22 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.edu.codekids.PascalForumFragment.OnListFragmentInteractionListener;
+import com.edu.codekids.PascalForumFragment.OnPascalFragmentInteractionListener;
 import com.edu.codekids.dummy.DummyContent.DummyItem;
 
 import java.util.List;
 
 /**
  * {@link RecyclerView.Adapter} that can display a {@link DummyItem} and makes a call to the
- * specified {@link OnListFragmentInteractionListener}.
+ * specified {@link OnPascalFragmentInteractionListener}.
  * TODO: Replace the implementation with code for your data type.
  */
 public class MyPascalForumRecyclerViewAdapter extends RecyclerView.Adapter<MyPascalForumRecyclerViewAdapter.ViewHolder> {
 
     private final List<DummyItem> mValues;
-    private final OnListFragmentInteractionListener mListener;
+    private final OnPascalFragmentInteractionListener mListener;
 
-    public MyPascalForumRecyclerViewAdapter(List<DummyItem> items, OnListFragmentInteractionListener listener) {
+    public MyPascalForumRecyclerViewAdapter(List<DummyItem> items, OnPascalFragmentInteractionListener listener) {
         mValues = items;
         mListener = listener;
     }
