@@ -3,7 +3,8 @@ package com.edu.codekids;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
-
+import android.view.View;
+import android.widget.Button;
 import androidx.appcompat.app.AppCompatActivity;
 import java.util.Arrays;
 
@@ -33,6 +34,18 @@ public class MainActivity extends AppCompatActivity {
             startActivity(new Intent(this, AuthActivity.class));
             finish();
         }
+
+        Button buttonQuiz = findViewById(R.id.button_quiz);
+        buttonQuiz.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Quiz();
+            }
+        });
+    }
+
+    private void Quiz() {
+        Intent intent = new Intent(MainActivity.this, quiz_start_screenActivity.class);
 
     }
 
