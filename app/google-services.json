@@ -1,21 +1,21 @@
 {
   "project_info": {
-    "project_number": "656194707440",
-    "firebase_url": "https://codekids-61f51.firebaseio.com",
-    "project_id": "codekids-61f51",
-    "storage_bucket": "codekids-61f51.appspot.com"
+    "project_number": "245981083548",
+    "firebase_url": "https://codekids-c94c6.firebaseio.com",
+    "project_id": "codekids-c94c6",
+    "storage_bucket": "codekids-c94c6.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:656194707440:android:28d43ca331fb935a",
+        "mobilesdk_app_id": "1:245981083548:android:28d43ca331fb935a",
         "android_client_info": {
           "package_name": "com.edu.codekids"
         }
       },
       "oauth_client": [
         {
-          "client_id": "656194707440-vbpfj1t16cfvnb0qbi4qa841ms7ol9g6.apps.googleusercontent.com",
+          "client_id": "245981083548-k6k0o3qjlq7ba09648k6a8tn337uac1l.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
             "package_name": "com.edu.codekids",
@@ -23,21 +23,13 @@
           }
         },
         {
-          "client_id": "656194707440-trlfd9q4cjgn9las0p18q1tu6kluv4sk.apps.googleusercontent.com",
-          "client_type": 1,
-          "android_info": {
-            "package_name": "com.edu.codekids",
-            "certificate_hash": "c212d65d9d89047ee7d8de9a1156127e4ed096af"
-          }
-        },
-        {
-          "client_id": "656194707440-r6l4600pav5rfn1i2hn6t0if93s6rs9o.apps.googleusercontent.com",
+          "client_id": "245981083548-p8m00bu54siio5t3p017vesg2p0v23ha.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyDqg9l_FuhN7JjhzK0kpRz0N0tyuPJajT0"
+          "current_key": "AIzaSyCwD4a9lRIg_SFHJBCjYGk2tfA_duljvBY"
         }
       ],
       "services": {
@@ -48,7 +40,7 @@
           "status": 2,
           "other_platform_oauth_client": [
             {
-              "client_id": "656194707440-r6l4600pav5rfn1i2hn6t0if93s6rs9o.apps.googleusercontent.com",
+              "client_id": "245981083548-p8m00bu54siio5t3p017vesg2p0v23ha.apps.googleusercontent.com",
               "client_type": 3
             }
           ]

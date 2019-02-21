@@ -1,13 +1,13 @@
 package com.edu.codekids;
 
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
 
+import com.edu.codekids.dummy.DummyContent;
 import com.firebase.ui.auth.IdpResponse;
 import com.firebase.ui.auth.util.ExtraConstants;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -29,17 +29,13 @@ import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
-import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import java.io.InputStream;
-import java.net.HttpURLConnection;
-import java.net.URL;
 
 public class SignedInActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener {
+        implements NavigationView.OnNavigationItemSelectedListener, JavaForumFragment.OnJavaFragmentInteractionListener, PascalForumFragment.OnPascalFragmentInteractionListener {
 
     public static Intent createIntent(@NonNull Context context, @Nullable IdpResponse response) {
         return new Intent().setClass(context, SignedInActivity.class)
@@ -97,6 +93,11 @@ public class SignedInActivity extends AppCompatActivity
             Picasso.with(this).load(photoUrl.toString()).into(uPhoto);
         } else uPhoto.setImageResource(R.drawable.ic_person_white);
 
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        HomeFragment fragment = new HomeFragment();
+        fragmentTransaction.replace(R.id.signedIn, fragment);
+        fragmentTransaction.commit();
     }
 
     @Override
@@ -117,10 +118,27 @@ public class SignedInActivity extends AppCompatActivity
 
         if (id == R.id.nav_setting) {
             startActivity(new Intent(this, SettingsActivity.class));
+        } else if (id == R.id.nav_forum){
+            FragmentManager fragmentManager = getSupportFragmentManager();
+            FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+            ForumFragment fragment = new ForumFragment();
+            fragmentTransaction.replace(R.id.signedIn, fragment);
+            fragmentTransaction.commit();
+        } else if(id == R.id.nav_home){
+            FragmentManager fragmentManager = getSupportFragmentManager();
+            FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+            HomeFragment fragment = new HomeFragment();
+            fragmentTransaction.replace(R.id.signedIn, fragment);
+            fragmentTransaction.commit();
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
+    }
+
+    @Override
+    public void onListFragmentInteraction(DummyContent.DummyItem item) {
+
     }
 }
