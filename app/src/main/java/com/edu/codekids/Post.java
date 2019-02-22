@@ -4,14 +4,14 @@ import java.util.Date;
 
 public class Post {
     private User PuId, PuName, PuType;
-    private String pTitile, pContent;
+    private String pTitle, pContent;
     private Date pTime;
     private int commentCount;
 
     public Post(){}
 
     public Post(String title, String content, Date time, int comcount){
-        pTitile=title; pContent=content; pTime=time; commentCount=comcount;
+        pTitle =title; pContent=content; pTime=time; commentCount=comcount;
     }
 
     public Date getpTime() {
@@ -22,8 +22,8 @@ public class Post {
         return pContent;
     }
 
-    public String getpTitile() {
-        return pTitile;
+    public String getpTitle() {
+        return pTitle;
     }
 
     public int getCommentCount() {
