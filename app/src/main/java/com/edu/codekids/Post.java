@@ -6,12 +6,11 @@ public class Post {
     private User PuId, PuName, PuType;
     private String pTitle, pContent;
     private Date pTime;
-    private int commentCount;
 
     public Post(){}
 
-    public Post(String title, String content, Date time, int comcount){
-        pTitle =title; pContent=content; pTime=time; commentCount=comcount;
+    public Post(String title, String content, Date time){
+        pTitle =title; pContent=content; pTime=time;
     }
 
     public Date getpTime() {
@@ -24,10 +23,6 @@ public class Post {
 
     public String getpTitle() {
         return pTitle;
-    }
-
-    public int getCommentCount() {
-        return commentCount;
     }
 
 }
