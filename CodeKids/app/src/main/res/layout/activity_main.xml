@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorBackground"
+    android:padding="16dp"
+    tools:context=".MainActivity">
+
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="78dp"
+        android:text="Home Page"
+        android:textColor="@android:color/black"
+        android:textSize="35sp"
+        android:textAlignment="center"/>
+
+    <ImageButton
+        android:id="@+id/imageButton3"
+        android:layout_width="128dp"
+        android:layout_height="128dp"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="325dp"
+        android:layout_marginEnd="50dp"
+        android:adjustViewBounds="true"
+        android:background="@drawable/pinkcircle"
+        android:src="@drawable/ic_book_black_24dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignEnd="@+id/imageButton3"
+        android:layout_below="@id/imageButton3"
+        android:layout_marginEnd="30dp"
+        android:text="Record"
+        android:textColor="@android:color/black"
+        android:textSize="20sp"
+        android:textAlignment="center"/>
+    <ImageButton
+        android:id="@+id/imageButton2"
+        android:layout_width="128dp"
+        android:layout_height="128dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="50dp"
+        android:layout_marginTop="325dp"
+        android:background="@drawable/yellowcircle"
+        android:src="@drawable/ic_question_answer_black_24dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignEnd="@+id/imageButton2"
+        android:layout_below="@id/imageButton2"
+        android:layout_marginEnd="36dp"
+        android:text="Forum"
+        android:textColor="@android:color/black"
+        android:textSize="20sp"
+        android:textAlignment="center"/>
+
+    <ImageButton
+        android:id="@+id/imageButton"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentStart="true"
+        android:layout_width="128dp"
+        android:layout_height="128dp"
+        android:layout_marginStart="50dp"
+        android:layout_marginTop="500dp"
+        android:src="@drawable/ic_school_black_24dp"
+        android:background="@drawable/purplecircle"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignEnd="@+id/imageButton"
+        android:layout_below="@id/imageButton"
+        android:layout_marginEnd="36dp"
+        android:text="Learn"
+        android:textColor="@android:color/black"
+        android:textSize="20sp"
+        android:textAlignment="center"/>
+
+
+    <ImageButton
+        android:id="@+id/imageButton1"
+        android:layout_width="128dp"
+        android:layout_height="128dp"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="500dp"
+        android:layout_marginEnd="50dp"
+        android:adjustViewBounds="true"
+        android:background="@drawable/greencircle"
+        android:clickable="true"
+        android:src="@drawable/ic_content_paste_black_24dp" />
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignEnd="@+id/imageButton1"
+        android:layout_below="@id/imageButton"
+        android:layout_marginEnd="40dp"
+        android:text="Quiz"
+        android:textColor="@android:color/black"
+        android:textSize="20sp" />
+</RelativeLayout>
+

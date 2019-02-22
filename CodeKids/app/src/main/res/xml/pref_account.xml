@@ -1,0 +1,28 @@
+<PreferenceScreen xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+
+    <PreferenceCategory
+        android:title="Account Settings">
+
+        <Preference
+            android:id="@+id/reset_pw"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:key="reset_pw"
+            android:title="Reset Password" />
+        <Preference
+            android:id="@+id/del_ac"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:key="del_ac"
+            android:title="Delete Account" />
+        <Preference
+            android:id="@+id/sign_out"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:key="sign_out"
+            android:title="Sign Out" />
+    </PreferenceCategory>
+
+</PreferenceScreen>
