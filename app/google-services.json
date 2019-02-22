@@ -1,21 +1,29 @@
 {
   "project_info": {
-    "project_number": "77617943913",
-    "firebase_url": "https://codekids-ad05d.firebaseio.com",
-    "project_id": "codekids-ad05d",
-    "storage_bucket": "codekids-ad05d.appspot.com"
+    "project_number": "245981083548",
+    "firebase_url": "https://codekids-c94c6.firebaseio.com",
+    "project_id": "codekids-c94c6",
+    "storage_bucket": "codekids-c94c6.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:77617943913:android:28d43ca331fb935a",
+        "mobilesdk_app_id": "1:245981083548:android:28d43ca331fb935a",
         "android_client_info": {
           "package_name": "com.edu.codekids"
         }
       },
       "oauth_client": [
         {
-          "client_id": "77617943913-3vvk5s4f6r8tt9icbuic6h4e3rov7vr7.apps.googleusercontent.com",
+          "client_id": "245981083548-k6k0o3qjlq7ba09648k6a8tn337uac1l.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.edu.codekids",
+            "certificate_hash": "aab32495efecd4d149804579f2109d15dacb04d6"
+          }
+        },
+        {
+          "client_id": "245981083548-bn7qtp4hpk1rcvtmtt727nd8a4oor24b.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
             "package_name": "com.edu.codekids",
@@ -23,13 +31,21 @@
           }
         },
         {
-          "client_id": "77617943913-k29tirano999rlhleref35kljtkdaf6j.apps.googleusercontent.com",
+          "client_id": "245981083548-0dfsjq8d7nqttoh8p1cm7usm1q2vj1bp.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.edu.codekids",
+            "certificate_hash": "9d52ae74d2834e9d519a34e811b021761d9c7b02"
+          }
+        },
+        {
+          "client_id": "245981083548-p8m00bu54siio5t3p017vesg2p0v23ha.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyC8kNIjz-iAA9SwqsPvZPTudQMXjkl7ve4"
+          "current_key": "AIzaSyCwD4a9lRIg_SFHJBCjYGk2tfA_duljvBY"
         }
       ],
       "services": {
@@ -40,7 +56,7 @@
           "status": 2,
           "other_platform_oauth_client": [
             {
-              "client_id": "77617943913-k29tirano999rlhleref35kljtkdaf6j.apps.googleusercontent.com",
+              "client_id": "245981083548-p8m00bu54siio5t3p017vesg2p0v23ha.apps.googleusercontent.com",
               "client_type": 3
             }
           ]
