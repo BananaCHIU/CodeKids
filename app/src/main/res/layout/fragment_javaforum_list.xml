@@ -8,5 +8,8 @@
     android:layout_height="match_parent"
     android:layout_marginLeft="16dp"
     android:layout_marginRight="16dp"
-    tools:context=".JavaForumFragment"
-    tools:listitem="@layout/fragment_javaforum" />
+    tools:context="JavaForumFragment"
+    tools:listitem="@layout/fragment_javaforum"
+    android:focusable="true"
+    android:clickable="true"
+    android:background="?attr/selectableItemBackground"/>

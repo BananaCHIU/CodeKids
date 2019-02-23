@@ -2,10 +2,13 @@ package com.edu.codekids;
 
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.app.Activity;
+import android.app.Application;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.edu.codekids.JavaForumFragment.OnJavaFragmentInteractionListener;
 import com.edu.codekids.dummy.DummyContent.DummyItem;
@@ -35,7 +38,7 @@ public class MyJavaForumRecyclerViewAdapter extends RecyclerView.Adapter<MyJavaF
     }
 
     @Override
-    public void onBindViewHolder(final ViewHolder holder, int position) {
+    public void onBindViewHolder(final ViewHolder holder, final int position) {
         holder.mItem = mValues.get(position);
         holder.mIdView.setText(mValues.get(position).id);
         holder.mContentView.setText(mValues.get(position).content);
@@ -48,6 +51,7 @@ public class MyJavaForumRecyclerViewAdapter extends RecyclerView.Adapter<MyJavaF
                     // fragment is attached to one) that an item has been selected.
                     mListener.onListFragmentInteraction(holder.mItem);
                 }
+                Toast.makeText(v.getContext(), "test" + position, Toast.LENGTH_LONG).show();
             }
         });
     }
@@ -74,5 +78,25 @@ public class MyJavaForumRecyclerViewAdapter extends RecyclerView.Adapter<MyJavaF
         public String toString() {
             return super.toString() + " '" + mContentView.getText() + "'";
         }
+    }
+
+    public static interface OnItemClickListener
+    {
+        void onItemClick(View view , int position);
+    }
+
+    private OnItemClickListener mOnItemClickListener = null;
+
+    public void onClick(View v)
+    {
+        if (mOnItemClickListener != null)
+        {
+            mOnItemClickListener.onItemClick(v,(int)v.getTag());
+        }
+    }
+
+    public void setOnItemClickListener(OnItemClickListener listener)
+    {
+        this.mOnItemClickListener = listener;
     }
 }
