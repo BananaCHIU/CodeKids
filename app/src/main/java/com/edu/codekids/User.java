@@ -2,6 +2,7 @@ package com.edu.codekids;
 
 public class User {
     private String uId, uName ,uType;
+
     public User(){ }
 
     public User(String uid, String name, String type){
