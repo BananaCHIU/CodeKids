@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Toast;
 
@@ -34,21 +35,40 @@ public class RegisterActivity extends AppCompatActivity {
 
 
         button.setOnClickListener(new View.OnClickListener() {
+            private boolean valid = false;
             @Override
             public void onClick(View view) {
+                TextInputLayout nameLayout = findViewById(R.id.InputLayout);
                 TextInputEditText name = findViewById(R.id.name);
+                if(name.length() == 0){
+                    nameLayout.setError("Error in name input");
+                    valid = false;
+                }
+                else{
+                    nameLayout.setError(null);
+                    valid = true;
+                }
                 RadioGroup type = findViewById(R.id.type);
+                RadioButton student = (RadioButton) view.findViewById(R.id.student);
                 switch(type.getCheckedRadioButtonId()){
                     case R.id.teacher:
                         addDocument(name.getText().toString(),"teacher");
+                        valid = true;
                         break;
                     case R.id.student:
                         addDocument(name.getText().toString(),"student");
+                        valid = true;
+                        break;
+                    default:
+                        Toast.makeText(RegisterActivity.this,"Please Select User Type",Toast.LENGTH_LONG).show();
+                        valid = false;
                         break;
                 }
-                Intent intent = new Intent(view.getContext(), SignedInActivity.class);
-                RegisterActivity.this.startActivity(intent);
-                finish();
+                if (valid) {
+                    Intent intent = new Intent(view.getContext(), SignedInActivity.class);
+                    RegisterActivity.this.startActivity(intent);
+                    finish();
+                }
             }
         });
     }
