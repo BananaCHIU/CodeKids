@@ -2,6 +2,8 @@ package com.edu.codekids;
 
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
+
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
@@ -10,15 +12,24 @@ import android.os.Bundle;
 import com.edu.codekids.dummy.DummyContent;
 import com.firebase.ui.auth.IdpResponse;
 import com.firebase.ui.auth.util.ExtraConstants;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
 
+import android.util.Log;
 import android.view.View;
 
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.UserInfo;
+import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.Query;
+import com.google.firebase.firestore.QuerySnapshot;
 import com.squareup.picasso.Picasso;
 
 import androidx.annotation.NonNull;
@@ -37,6 +48,8 @@ import android.widget.TextView;
 public class SignedInActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener, JavaForumFragment.OnJavaFragmentInteractionListener, PascalForumFragment.OnPascalFragmentInteractionListener {
 
+    private static final String TAG = "Error:";
+
     public static Intent createIntent(@NonNull Context context, @Nullable IdpResponse response) {
         return new Intent().setClass(context, SignedInActivity.class)
                 .putExtra(ExtraConstants.IDP_RESPONSE, response);
@@ -49,8 +62,7 @@ public class SignedInActivity extends AppCompatActivity
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_signed_in);
-        startActivity(new Intent(this, RegisterActivity.class));
-        finish();
+
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         if (user != null) {
             for (UserInfo profile : user.getProviderData()) {
