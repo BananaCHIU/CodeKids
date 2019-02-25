@@ -3,10 +3,9 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
- <Button
-     android:id="@+id/button"
+ <ListView
      android:layout_width="match_parent"
-     android:layout_height="wrap_content"
-     android:text="To quiz" />
+     android:layout_height="match_parent"
+     android:id="@+id/chapters"/>
 
 </RelativeLayout>
