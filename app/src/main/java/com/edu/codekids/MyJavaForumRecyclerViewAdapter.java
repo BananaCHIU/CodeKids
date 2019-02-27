@@ -79,24 +79,4 @@ public class MyJavaForumRecyclerViewAdapter extends RecyclerView.Adapter<MyJavaF
             return super.toString() + " '" + mContentView.getText() + "'";
         }
     }
-
-    public static interface OnItemClickListener
-    {
-        void onItemClick(View view , int position);
-    }
-
-    private OnItemClickListener mOnItemClickListener = null;
-
-    public void onClick(View v)
-    {
-        if (mOnItemClickListener != null)
-        {
-            mOnItemClickListener.onItemClick(v,(int)v.getTag());
-        }
-    }
-
-    public void setOnItemClickListener(OnItemClickListener listener)
-    {
-        this.mOnItemClickListener = listener;
-    }
 }

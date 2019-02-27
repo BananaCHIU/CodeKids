@@ -43,7 +43,7 @@ dependencies {
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.1.1'
     implementation 'androidx.viewpager:viewpager:1.0.0'
     implementation 'androidx.coordinatorlayout:coordinatorlayout:1.1.0-alpha01'
-    implementation 'com.google.firebase:firebase-firestore:18.0.1'
+    implementation 'com.google.firebase:firebase-firestore:18.1.0'
 
     // Add dependency
     implementation 'com.crashlytics.sdk.android:crashlytics:2.9.9'
