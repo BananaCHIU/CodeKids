@@ -39,8 +39,6 @@ public class AuthActivity extends AppCompatActivity {
                 AuthUI.getInstance().createSignInIntentBuilder().setAvailableProviders(Arrays.asList(
                         new AuthUI.IdpConfig.GoogleBuilder().build(),
                         new AuthUI.IdpConfig.EmailBuilder().build()))
-                        .setLogo(R.drawable.baseline_desktop_windows_black_48)      // Set logo drawable
-                        .setTheme(R.style.ThemeOverlay_MaterialComponents_Light)      // Set theme
                         .build(),
                 RC_SIGN_IN);
     }
