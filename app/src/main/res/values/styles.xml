@@ -3,14 +3,16 @@
     <!-- Base application theme. -->
     <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
         <!-- Customize your theme here. -->
-        <item name="colorPrimary">@color/primaryColor</item>
-        <item name="colorPrimaryDark">@color/primaryDarkColor</item>
-        <item name="colorAccent">@color/secondaryColor</item>
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryVariant</item>
+        <item name="colorAccent">@color/colorSecondary</item>
 
-        <item name="android:colorSecondary">@color/secondaryColor</item>
+        <!-- New MaterialComponents attributes. -->
+        <item name="colorPrimaryVariant">@color/colorPrimaryVariant</item>
+        <item name="colorSecondaryVariant">@color/colorSecondaryVariant</item>
         <item name="colorSurface">@color/colorSurface</item>
-        <item name="colorOnPrimary">@color/primaryTextColor</item>
-        <item name="colorOnSecondary">@color/secondaryTextColor</item>
+        <item name="colorOnPrimary">@color/colorOnPrimary</item>
+        <item name="colorOnSecondary">@color/colorOnSecondary</item>
         <item name="colorOnBackground">@color/my_app_color_on_background</item>
         <item name="colorOnError">@color/colorOnError</item>
         <item name="colorOnSurface">@color/colorOnSurface</item>
