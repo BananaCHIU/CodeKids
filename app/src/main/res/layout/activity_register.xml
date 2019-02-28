@@ -16,7 +16,7 @@
         android:layout_marginEnd="32dp"
         android:layout_marginBottom="32dp"
         android:hint="Nickname"
-        app:boxBackgroundMode="filled"
+        app:boxBackgroundMode="none"
         app:helperText="*Required"
         app:helperTextEnabled="true"
         app:hintAnimationEnabled="true"
@@ -54,14 +54,16 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:paddingStart="20dp"
-            android:text="Teacher" />
+            android:text="Teacher"
+            android:buttonTint="@color/colorAccent"/>
 
         <RadioButton
             android:id="@+id/student"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:paddingStart="20dp"
-            android:text="Student" />
+            android:text="Student"
+            android:buttonTint="@color/colorAccent"/>
     </RadioGroup>
 
     <TextView
@@ -92,6 +94,7 @@
         android:text="Save"
         android:textColor="@color/colorOnPrimary"
         android:textSize="14sp"
+        android:backgroundTint="@color/colorAccent"
         app:cornerRadius="4dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

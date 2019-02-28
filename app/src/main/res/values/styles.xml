@@ -16,6 +16,8 @@
         <item name="colorOnBackground">@color/my_app_color_on_background</item>
         <item name="colorOnError">@color/colorOnError</item>
         <item name="colorOnSurface">@color/colorOnSurface</item>
+        <item name="colorButtonNormal">@color/colorPrimary</item>
+        <item name="colorControlHighlight">@color/colorAccent</item>
         <item name="textAppearanceHeadline1">@style/TextAppearance.MaterialComponents.Headline1
         </item>
         <item name="textAppearanceHeadline2">@style/TextAppearance.MaterialComponents.Headline2

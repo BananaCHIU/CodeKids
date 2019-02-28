@@ -31,40 +31,35 @@ public class RegisterActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
-        MaterialButton button = findViewById(R.id.save_button);
-
+        final MaterialButton button = findViewById(R.id.save_button);
+        RadioButton student = (RadioButton) findViewById(R.id.student);
+        student.setChecked(true);
 
         button.setOnClickListener(new View.OnClickListener() {
-            private boolean valid = false;
+            private boolean textValid = false;
             @Override
             public void onClick(View view) {
                 TextInputLayout nameLayout = findViewById(R.id.InputLayout);
                 TextInputEditText name = findViewById(R.id.name);
                 if(name.length() == 0){
-                    nameLayout.setError("Error in name input");
-                    valid = false;
+                    nameLayout.setError("Nickname Cannot Be Empty");
+                    textValid= false;
                 }
                 else{
                     nameLayout.setError(null);
-                    valid = true;
+                    textValid = true;
                 }
                 RadioGroup type = findViewById(R.id.type);
-                RadioButton student = (RadioButton) view.findViewById(R.id.student);
+
                 switch(type.getCheckedRadioButtonId()){
                     case R.id.teacher:
                         addDocument(name.getText().toString(),"teacher");
-                        valid = true;
                         break;
                     case R.id.student:
                         addDocument(name.getText().toString(),"student");
-                        valid = true;
-                        break;
-                    default:
-                        Toast.makeText(RegisterActivity.this,"Please Select User Type",Toast.LENGTH_LONG).show();
-                        valid = false;
                         break;
                 }
-                if (valid) {
+                if (textValid) {
                     Intent intent = new Intent(view.getContext(), SignedInActivity.class);
                     RegisterActivity.this.startActivity(intent);
                     finish();
