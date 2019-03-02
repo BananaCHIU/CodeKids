@@ -73,8 +73,8 @@ public class CommentRVAdapter extends RecyclerView.Adapter<CommentRVAdapter.Comm
             commentViewHolder.userName.setText(comments.get(i).getCuName());
             commentViewHolder.date.setText(comments.get(i).getcTime().toString());
             commentViewHolder.c_content.setText(comments.get(i).getcContent());
-            commentViewHolder.numlike.setText(comments.get(i).getcVote());
-            commentViewHolder.numdislike.setText(comments.get(i).getcDislike());
+            commentViewHolder.numlike.setText(Integer.toString(comments.get(i).getcVote()));
+            commentViewHolder.numdislike.setText(Integer.toString(comments.get(i).getcDislike()));
         }
     }
 

@@ -7,6 +7,7 @@ import com.google.android.material.snackbar.Snackbar;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -42,5 +43,6 @@ public class ForumPostActivity extends AppCompatActivity
         rv.setLayoutManager(linearLayoutManager);
         CommentRVAdapter adapter = new CommentRVAdapter(comments);
         rv.setAdapter(adapter);
+        rv.addItemDecoration(new DividerItemDecoration(rv.getContext(), DividerItemDecoration.VERTICAL));
     }
 }

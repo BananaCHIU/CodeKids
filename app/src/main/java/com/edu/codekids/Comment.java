@@ -48,13 +48,15 @@ public class Comment {
     {
         ArrayList<Comment> sample = new ArrayList<Comment>();
 
-        User pU, cU1, cU2, cU3, cU4, cU5;
+        User pU, cU1, cU2, cU3, cU4, cU5, cU6, cU7;
         pU = new User("001", "Isaac", "Student");
         cU1 = new User("002", "Lee", "Teacher");
         cU2 = new User("003", "is", "Student");
         cU3 = new User("004", "a", "Student");
         cU4 = new User("005", "handsome", "Teacher");
         cU5 = new User("006", "boy", "Teacher");
+        cU6 = new User("007", "X", "Student");
+        cU7 = new User("008", "D", "Teacher");
 
         Post post = new Post(pU, "Sample Title", "Sample Post Content", new Date());
 
@@ -68,6 +70,10 @@ public class Comment {
         sample.add(c4);
         Comment c5 = new Comment(cU5, "Sample fifth comment", new Date(), 2, 1);
         sample.add(c5);
+        Comment c6 = new Comment(cU6, "Sample sixth comment", new Date(), 0, 1);
+        sample.add(c6);
+        Comment c7 = new Comment(cU7, "Sample seventh comment", new Date(), 2, 3);
+        sample.add(c7);
 
         for (int i = 0; i < sample.size(); i++)
         {
