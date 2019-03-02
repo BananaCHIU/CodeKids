@@ -32,5 +32,4 @@ public class Post {
     public String getpTitle() {
         return pTitle;
     }
-
 }

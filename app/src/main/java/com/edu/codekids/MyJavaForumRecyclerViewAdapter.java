@@ -4,6 +4,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.app.Activity;
 import android.app.Application;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -52,6 +53,8 @@ public class MyJavaForumRecyclerViewAdapter extends RecyclerView.Adapter<MyJavaF
                     mListener.onListFragmentInteraction(holder.mItem);
                 }
                 Toast.makeText(v.getContext(), "test" + position, Toast.LENGTH_LONG).show();
+                Intent intent = new Intent(v.getContext(), ForumPostActivity.class);
+                v.getContext().startActivity(intent);
             }
         });
     }

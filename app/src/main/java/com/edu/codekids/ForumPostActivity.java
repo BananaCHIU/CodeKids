@@ -7,15 +7,24 @@ import com.google.android.material.snackbar.Snackbar;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.View;
 
-public class ForumPostActivity extends AppCompatActivity {
+import java.util.List;
+
+public class ForumPostActivity extends AppCompatActivity
+{
+
+    List<Comment> comments = Comment.sampledata();
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState)
+    {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_forum_post);
+
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
@@ -27,6 +36,11 @@ public class ForumPostActivity extends AppCompatActivity {
                         .setAction("Action", null).show();
             }
         });
-    }
 
+        RecyclerView rv = (RecyclerView)findViewById(R.id.comment_RecyclerView);
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
+        rv.setLayoutManager(linearLayoutManager);
+        CommentRVAdapter adapter = new CommentRVAdapter(comments);
+        rv.setAdapter(adapter);
+    }
 }
