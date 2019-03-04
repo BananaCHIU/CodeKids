@@ -5,8 +5,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.TextView;
+import org.ocpsoft.prettytime.PrettyTime;
+import java.util.Date;
 
 import java.util.List;
+import java.util.Locale;
 
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
@@ -20,7 +23,6 @@ public class CommentRVAdapter extends RecyclerView.Adapter<CommentRVAdapter.Comm
         public final TextView date;
         public final TextView c_content;
         public final TextView numlike;
-        public final TextView numdislike;
         public final ImageButton likeButton;
         public final ImageButton dislikeButton;
 
@@ -33,7 +35,6 @@ public class CommentRVAdapter extends RecyclerView.Adapter<CommentRVAdapter.Comm
             date = (TextView)itemView.findViewById(R.id.comment_Date);
             c_content = (TextView)itemView.findViewById(R.id.comment_Content);
             numlike = (TextView)itemView.findViewById(R.id.comment_LikeNum);
-            numdislike = (TextView)itemView.findViewById(R.id.comment_DislikeNum);
             likeButton = (ImageButton)itemView.findViewById(R.id.comment_LikeButton);
             dislikeButton = (ImageButton)itemView.findViewById(R.id.comment_DislikeButton);
         }
@@ -61,20 +62,19 @@ public class CommentRVAdapter extends RecyclerView.Adapter<CommentRVAdapter.Comm
     public void onBindViewHolder(final CommentViewHolder commentViewHolder, final int i)
     {
         comments = Comment.sampledata();
-
+        PrettyTime prettyTime = new PrettyTime(Locale.getDefault());
         if (i == 0)
         {
             commentViewHolder.userName.setText(comments.get(i).getParentPost().getUserName());
-            commentViewHolder.date.setText(comments.get(i).getParentPost().getpTime().toString());
+            commentViewHolder.date.setText(prettyTime.format(comments.get(i).getParentPost().getpTime()));
             commentViewHolder.c_content.setText(comments.get(i).getParentPost().getpContent());
         }
         else
         {
             commentViewHolder.userName.setText(comments.get(i).getCuName());
-            commentViewHolder.date.setText(comments.get(i).getcTime().toString());
+            commentViewHolder.date.setText(prettyTime.format(comments.get(i).getcTime()));
             commentViewHolder.c_content.setText(comments.get(i).getcContent());
-            commentViewHolder.numlike.setText(Integer.toString(comments.get(i).getcVote()));
-            commentViewHolder.numdislike.setText(Integer.toString(comments.get(i).getcDislike()));
+            commentViewHolder.numlike.setText(Integer.toString(comments.get(i).getcVote() - comments.get(i).getcDislike()));
         }
     }
 

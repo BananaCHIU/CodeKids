@@ -8,9 +8,10 @@
     android:orientation="vertical">
 
     <androidx.cardview.widget.CardView
+        android:id="@+id/comment_CardView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/comment_CardView">
+        app:cardBackgroundColor="@color/colorSurface">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -22,7 +23,7 @@
                 android:id="@+id/comment_UserName"
                 android:layout_width="75dp"
                 android:layout_height="wrap_content"
-                android:textColor="@color/fui_linkColor"
+                android:textColor="@android:color/darker_gray"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
@@ -31,7 +32,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="16dp"
                 android:layout_marginStart="8dp"
-                android:textColor="@color/fui_bgEmail"
+                android:textColor="@android:color/darker_gray"
                 app:layout_constraintStart_toEndOf="@+id/comment_UserName"
                 app:layout_constraintTop_toTopOf="parent" />
 
@@ -40,8 +41,7 @@
                 android:layout_width="371dp"
                 android:layout_height="119dp"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/comment_Date" />
+                app:layout_constraintEnd_toEndOf="parent" />
 
             <TextView
                 android:id="@+id/comment_LikeNum"
@@ -53,24 +53,12 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/comment_LikeButton" />
 
-            <TextView
-                android:id="@+id/comment_DislikeNum"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="3dp"
-                android:layout_marginBottom="5dp"
-                android:textAlignment="center"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toStartOf="@+id/comment_Content"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/comment_DislikeButton"
-                app:layout_constraintVertical_bias="0.125" />
-
             <ImageButton
                 android:id="@+id/comment_LikeButton"
                 android:layout_width="40dp"
                 android:layout_height="33dp"
                 android:layout_marginTop="8dp"
+                android:background="@color/colorAccent"
                 app:layout_constraintEnd_toStartOf="@+id/comment_Content"
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
@@ -80,8 +68,9 @@
             <ImageButton
                 android:id="@+id/comment_DislikeButton"
                 android:layout_width="40dp"
-                android:layout_height="30dp"
+                android:layout_height="33dp"
                 android:layout_marginTop="3dp"
+                android:background="@color/colorAccent"
                 app:layout_constraintEnd_toStartOf="@+id/comment_Content"
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
