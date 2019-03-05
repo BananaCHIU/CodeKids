@@ -63,19 +63,11 @@ public class CommentRVAdapter extends RecyclerView.Adapter<CommentRVAdapter.Comm
     {
         comments = Comment.sampledata();
         PrettyTime prettyTime = new PrettyTime(Locale.getDefault());
-        if (i == 0)
-        {
-            commentViewHolder.userName.setText(comments.get(i).getParentPost().getUserName());
-            commentViewHolder.date.setText(prettyTime.format(comments.get(i).getParentPost().getpTime()));
-            commentViewHolder.c_content.setText(comments.get(i).getParentPost().getpContent());
-        }
-        else
-        {
-            commentViewHolder.userName.setText(comments.get(i).getCuName());
-            commentViewHolder.date.setText(prettyTime.format(comments.get(i).getcTime()));
-            commentViewHolder.c_content.setText(comments.get(i).getcContent());
-            commentViewHolder.numlike.setText(Integer.toString(comments.get(i).getcVote() - comments.get(i).getcDislike()));
-        }
+
+        commentViewHolder.userName.setText(comments.get(i).getCuName());
+        commentViewHolder.date.setText(prettyTime.format(comments.get(i).getcTime()));
+        commentViewHolder.c_content.setText(comments.get(i).getcContent());
+        commentViewHolder.numlike.setText(Integer.toString(comments.get(i).getcVote() - comments.get(i).getcDislike()));
     }
 
     @Override
