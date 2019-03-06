@@ -20,26 +20,25 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <com.google.android.material.chip.ChipGroup
+            android:id="@+id/chip_group"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:paddingLeft="16dp"
             app:chipSpacingHorizontal="16dp"
-            app:singleLine="true">
+            app:singleSelection="true">
 
             <com.google.android.material.chip.Chip
                 android:id="@+id/java"
                 style="@style/Widget.MaterialComponents.Chip.Choice"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:checkable="true"
-                android:text="Java" />
+                android:text="Java"/>
 
             <com.google.android.material.chip.Chip
                 android:id="@+id/pascal"
                 style="@style/Widget.MaterialComponents.Chip.Choice"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:checkable="true"
                 android:text="Pascal" />
 
         </com.google.android.material.chip.ChipGroup>
@@ -52,7 +51,7 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="4dp"
         android:layout_marginEnd="8dp"
-        android:background="@android:color/darker_gray"
+        android:background="@color/fui_buttonShadow"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/linearLayout" />
@@ -68,9 +67,9 @@
         android:hint="Title"
         android:inputType="text"
         android:singleLine="true"
-        android:textColorHint="@color/mtrl_on_surface_emphasis_medium"
+        android:textColorHint="@color/mtrl_on_surface_disabled"
         android:textSize="24sp"
-        app:backgroundTint="@android:color/darker_gray"
+        app:backgroundTint="@color/fui_buttonShadow"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/chipDivider" />
