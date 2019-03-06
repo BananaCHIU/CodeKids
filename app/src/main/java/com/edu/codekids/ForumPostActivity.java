@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.View;
+import android.widget.TextView;
 
 import java.util.List;
 
@@ -29,6 +30,9 @@ public class ForumPostActivity extends AppCompatActivity
 
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        TextView textView = (TextView)toolbar.findViewById(R.id.toolbarTextView);
+        textView.setText(comments.get(0).getParentPost().getpTitle());
+        getSupportActionBar().setDisplayShowTitleEnabled(false);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
 
@@ -53,7 +57,6 @@ public class ForumPostActivity extends AppCompatActivity
         rv.setLayoutManager(linearLayoutManager);
         CommentRVAdapter adapter = new CommentRVAdapter(comments);
         rv.setAdapter(adapter);
-        rv.addItemDecoration(new DividerItemDecoration(rv.getContext(), DividerItemDecoration.VERTICAL));
 
 
     }

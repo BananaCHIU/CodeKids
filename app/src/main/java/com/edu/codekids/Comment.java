@@ -49,14 +49,14 @@ public class Comment {
         ArrayList<Comment> sample = new ArrayList<Comment>();
 
         User pU, cU1, cU2, cU3, cU4, cU5, cU6, cU7;
-        pU = new User("001", "Isaac", "Student");
-        cU1 = new User("002", "Lee", "Teacher");
-        cU2 = new User("003", "is", "Student");
-        cU3 = new User("004", "a", "Student");
-        cU4 = new User("005", "handsome", "Teacher");
-        cU5 = new User("006", "boy", "Teacher");
-        cU6 = new User("007", "X", "Student");
-        cU7 = new User("008", "D", "Teacher");
+        pU = new User("009", "This", "Student");
+        cU1 = new User("010", "is", "Teacher");
+        cU2 = new User("011", "a", "Student");
+        cU3 = new User("012", "sample", "Student");
+        cU4 = new User("013", "list", "Teacher");
+        cU5 = new User("014", "of", "Teacher");
+        cU6 = new User("015", "comment", "Student");
+        cU7 = new User("016", "data", "Teacher");
 
         Post post = new Post(pU, "Sample Title", "Sample Post Content", new Date());
 

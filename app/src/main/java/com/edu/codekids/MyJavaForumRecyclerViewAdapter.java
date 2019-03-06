@@ -1,5 +1,6 @@
 package com.edu.codekids;
 
+import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.app.Activity;
@@ -14,72 +15,74 @@ import android.widget.Toast;
 import com.edu.codekids.JavaForumFragment.OnJavaFragmentInteractionListener;
 import com.edu.codekids.dummy.DummyContent.DummyItem;
 
+import org.ocpsoft.prettytime.PrettyTime;
+
+import java.security.CryptoPrimitive;
 import java.util.List;
+import java.util.Locale;
 
 /**
  * {@link RecyclerView.Adapter} that can display a {@link DummyItem} and makes a call to the
  * specified {@link OnJavaFragmentInteractionListener}.
  * TODO: Replace the implementation with code for your data type.
  */
-public class MyJavaForumRecyclerViewAdapter extends RecyclerView.Adapter<MyJavaForumRecyclerViewAdapter.ViewHolder> {
+public class MyJavaForumRecyclerViewAdapter extends RecyclerView.Adapter<MyJavaForumRecyclerViewAdapter.PostViewHolder>
+{
 
-    private final List<DummyItem> mValues;
-    private final OnJavaFragmentInteractionListener mListener;
+    List<Post> posts;
 
-    public MyJavaForumRecyclerViewAdapter(List<DummyItem> items, OnJavaFragmentInteractionListener listener) {
-        mValues = items;
-        mListener = listener;
+
+    public MyJavaForumRecyclerViewAdapter(List<Post> items)
+    {
+        posts = items;
     }
 
     @Override
-    public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.fragment_javaforum, parent, false);
-        return new ViewHolder(view);
+    public PostViewHolder onCreateViewHolder(ViewGroup parent, int viewType)
+    {
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.fragment_javaforum, parent, false);
+        return new PostViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(final ViewHolder holder, final int position) {
-        holder.mItem = mValues.get(position);
-        holder.mIdView.setText(mValues.get(position).id);
-        holder.mContentView.setText(mValues.get(position).content);
+    public void onBindViewHolder(final PostViewHolder holder, final int i)
+    {
+        posts = Post.samplePosts();
+        PrettyTime prettyTime = new PrettyTime(Locale.getDefault());
 
-        holder.mView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (null != mListener) {
-                    // Notify the active callbacks interface (the activity, if the
-                    // fragment is attached to one) that an item has been selected.
-                    mListener.onListFragmentInteraction(holder.mItem);
-                }
-                Toast.makeText(v.getContext(), "test" + position, Toast.LENGTH_LONG).show();
-                Intent intent = new Intent(v.getContext(), ForumPostActivity.class);
-                v.getContext().startActivity(intent);
-            }
-        });
+        holder.postUser.setText(posts.get(i).getUserName());
+        holder.postDate.setText(prettyTime.format(posts.get(i).getpTime()));
+        holder.postTitle.setText(posts.get(i).getpTitle());
     }
 
     @Override
     public int getItemCount() {
-        return mValues.size();
+        return posts.size();
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder {
-        public final View mView;
-        public final TextView mIdView;
-        public final TextView mContentView;
-        public DummyItem mItem;
+    public static class PostViewHolder extends RecyclerView.ViewHolder
+    {
+        public final CardView cardView;
+        public final TextView postUser;
+        public final TextView postDate;
+        public final TextView postTitle;
 
-        public ViewHolder(View view) {
+        public PostViewHolder(View view)
+        {
             super(view);
-            mView = view;
-            mIdView = (TextView) view.findViewById(R.id.item_number);
-            mContentView = (TextView) view.findViewById(R.id.content);
-        }
-
-        @Override
-        public String toString() {
-            return super.toString() + " '" + mContentView.getText() + "'";
+            cardView = (CardView)itemView.findViewById(R.id.forum_CardView);
+            postUser = (TextView)itemView.findViewById(R.id.forum_PostUser);
+            postDate = (TextView)itemView.findViewById(R.id.forum_PostDate);
+            postTitle = (TextView)itemView.findViewById(R.id.forum_PostTitle);
+            view.setOnClickListener(new View.OnClickListener()
+            {
+                @Override
+                public void onClick(View v)
+                {
+                    Intent intent = new Intent(v.getContext(), ForumPostActivity.class);
+                    v.getContext().startActivity(intent);
+                }
+            });
         }
     }
 }
