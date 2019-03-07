@@ -36,6 +36,18 @@ public class CommentRVAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
             numlike = (TextView)itemView.findViewById(R.id.comment_LikeNum);
             likeButton = (ImageButton)itemView.findViewById(R.id.comment_LikeButton);
             dislikeButton = (ImageButton)itemView.findViewById(R.id.comment_DislikeButton);
+            likeButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    likeBtnPressed(likeButton, dislikeButton);
+                }
+            });
+            dislikeButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    dislikeBtnPressed(likeButton, dislikeButton);
+                }
+            });
         }
     }
 
@@ -63,13 +75,37 @@ public class CommentRVAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
         comments = Comment.sampledata();
         PrettyTime prettyTime = new PrettyTime(Locale.getDefault());
 
-        CommentViewHolder commentViewHolder = (CommentViewHolder) VH;
+        final CommentViewHolder commentViewHolder = (CommentViewHolder) VH;
         commentViewHolder.userName.setText(comments.get(i).getCuName());
         commentViewHolder.date.setText(prettyTime.format(comments.get(i).getcTime()));
         commentViewHolder.c_content.setText(comments.get(i).getcContent());
         commentViewHolder.numlike.setText(Integer.toString(comments.get(i).getcVote() - comments.get(i).getcDislike()));
-
     }
+
+    private static void likeBtnPressed(ImageButton likebtn, ImageButton dislikebtn) {
+        float likealpha, dislikealpha;
+        likealpha = likebtn.getAlpha(); dislikealpha = dislikebtn.getAlpha();
+        if((likealpha == (float) 0.4) && (dislikealpha == (float) 1)){                //Disliked
+            likebtn.setAlpha((float) 1); dislikebtn.setAlpha((float) 0.4);
+        } else if ((dislikealpha == (float) 0.4) && (likealpha == (float) 1)){        //Liked
+            likebtn.setAlpha((float) 0.4);
+        } else if ((dislikealpha == (float) 0.4) && (likealpha == (float) 0.4)){      //No Select
+            likebtn.setAlpha((float) 1);
+        }
+    }
+
+    private static void dislikeBtnPressed(ImageButton likebtn, ImageButton dislikebtn) {
+        float likealpha, dislikealpha;
+        likealpha = likebtn.getAlpha(); dislikealpha = dislikebtn.getAlpha();
+        if((likealpha == (float) 0.4) && (dislikealpha == (float) 1)){                //Disliked
+            dislikebtn.setAlpha((float) 0.4);
+        } else if ((dislikealpha == (float) 0.4) && (likealpha == (float) 1)){        //Liked
+            likebtn.setAlpha((float) 0.4); dislikebtn.setAlpha((float) 1);
+        } else if ((dislikealpha == (float) 0.4) && (likealpha == (float) 0.4)){      //No Select
+            dislikebtn.setAlpha((float) 1);
+        }
+    }
+
 
     @Override
     public void onAttachedToRecyclerView(RecyclerView recyclerView)

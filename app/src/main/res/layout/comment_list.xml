@@ -20,7 +20,6 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center">
 
-
             <TextView
                 android:id="@+id/comment_UserName"
                 android:layout_width="wrap_content"
@@ -38,7 +37,7 @@
                 android:id="@+id/comment_Date"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
+                android:layout_marginStart="24dp"
                 android:layout_marginTop="8dp"
                 android:text="COMMENTDATE"
                 android:textAlignment="center"
@@ -53,11 +52,14 @@
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="8dp"
                 android:layout_marginEnd="8dp"
+                android:layout_marginBottom="8dp"
                 android:text="COMMENTCONTENT"
                 android:textSize="16sp"
+                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/comment_LikeButton"
-                app:layout_constraintTop_toBottomOf="@+id/comment_Date" />
+                app:layout_constraintTop_toBottomOf="@+id/comment_Date"
+                app:layout_constraintVertical_bias="0.0" />
 
             <TextView
                 android:id="@+id/comment_LikeNum"
@@ -79,10 +81,11 @@
                 android:layout_height="33dp"
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="8dp"
-                android:background="@color/colorAccent"
+                android:alpha="0.4"
+                android:background="?attr/selectableItemBackgroundBorderless"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/comment_UserName"
-                app:srcCompat="@drawable/baseline_keyboard_arrow_up_black_18" />
+                app:srcCompat="@drawable/baseline_keyboard_arrow_up_black_36" />
 
             <ImageButton
                 android:id="@+id/comment_DislikeButton"
@@ -90,10 +93,13 @@
                 android:layout_height="33dp"
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="8dp"
-                android:background="@color/colorAccent"
+                android:layout_marginBottom="8dp"
+                android:alpha="0.4"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/comment_LikeNum"
-                app:srcCompat="@drawable/baseline_keyboard_arrow_down_black_18" />
+                app:srcCompat="@drawable/baseline_keyboard_arrow_down_black_36" />
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>
