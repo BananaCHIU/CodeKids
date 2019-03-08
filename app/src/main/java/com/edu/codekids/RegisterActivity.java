@@ -26,6 +26,7 @@ import androidx.appcompat.app.AppCompatActivity;
 public class RegisterActivity extends AppCompatActivity {
 
     private static final String TAG = "Error: ";
+    private static User user;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,6 +42,8 @@ public class RegisterActivity extends AppCompatActivity {
             public void onClick(View view) {
                 TextInputLayout nameLayout = findViewById(R.id.InputLayout);
                 TextInputEditText name = findViewById(R.id.name);
+                FirebaseUser fbuser = FirebaseAuth.getInstance().getCurrentUser();
+                String uid = fbuser.getUid();
                 if(name.length() == 0){
                     nameLayout.setError("Nickname Cannot Be Empty");
                     textValid= false;
@@ -51,16 +54,16 @@ public class RegisterActivity extends AppCompatActivity {
                 }
                 RadioGroup type = findViewById(R.id.type);
 
-                switch(type.getCheckedRadioButtonId()){
-                    case R.id.teacher:
-                        addDocument(name.getText().toString(),"teacher");
-                        break;
-                    case R.id.student:
-                        addDocument(name.getText().toString(),"student");
-                        break;
+                if (type.getCheckedRadioButtonId() == R.id.teacher) {
+                    user = new User(uid, name.getText().toString(), "teacher");
+                    addDocument(user);
+                } else if (type.getCheckedRadioButtonId() == R.id.teacher) {
+                    user = new User(uid, name.getText().toString(), "student");
+                    addDocument(user);
                 }
                 if (textValid) {
                     Intent intent = new Intent(view.getContext(), SignedInActivity.class);
+                    intent.putExtra("currentuser", user);
                     RegisterActivity.this.startActivity(intent);
                     finish();
                 }
@@ -68,13 +71,9 @@ public class RegisterActivity extends AppCompatActivity {
         });
     }
 
-    private void addDocument(String name, String type){
+    private void addDocument(User user){
         FirebaseFirestore db = FirebaseFirestore.getInstance();
-        FirebaseUser fbuser = FirebaseAuth.getInstance().getCurrentUser();
-        String uid = fbuser.getUid();
-
-        User user = new User(uid,name,type);
-        db.collection("users").document(uid).set(user);
+        db.collection("users").document(user.getuId()).set(user);
     }
 
     @Override

@@ -57,12 +57,13 @@ public class SignedInActivity extends AppCompatActivity
 
     String uid,name,email;
     Uri photoUrl;
+    static User currentuser;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_signed_in);
-
+        currentuser = (User) getIntent().getSerializableExtra("currentuser");
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         if (user != null) {
             for (UserInfo profile : user.getProviderData()) {
@@ -140,6 +141,10 @@ public class SignedInActivity extends AppCompatActivity
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
+    }
+
+    public static User getCurrentuser(){
+        return currentuser;
     }
 
     @Override
