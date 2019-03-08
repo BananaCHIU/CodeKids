@@ -36,18 +36,7 @@ public class CommentRVAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
             numlike = (TextView)itemView.findViewById(R.id.comment_LikeNum);
             likeButton = (ImageButton)itemView.findViewById(R.id.comment_LikeButton);
             dislikeButton = (ImageButton)itemView.findViewById(R.id.comment_DislikeButton);
-            likeButton.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    likeBtnPressed(likeButton, dislikeButton);
-                }
-            });
-            dislikeButton.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    dislikeBtnPressed(likeButton, dislikeButton);
-                }
-            });
+
         }
     }
 
@@ -79,7 +68,26 @@ public class CommentRVAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
         commentViewHolder.userName.setText(comments.get(i).getCuName());
         commentViewHolder.date.setText(prettyTime.format(comments.get(i).getcTime()));
         commentViewHolder.c_content.setText(comments.get(i).getcContent());
-        commentViewHolder.numlike.setText(Integer.toString(comments.get(i).getcVote() - comments.get(i).getcDislike()));
+        commentViewHolder.numlike.setText(Integer.toString(comments.get(i).getcVote()));
+        commentViewHolder.likeButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                likeBtnPressed(commentViewHolder.likeButton, commentViewHolder.dislikeButton);
+                comments.get(i).setcVote(comments.get(i).getcVote() + 1);
+                notifyItemChanged(i);
+                notifyDataSetChanged();
+
+            }
+        });
+        commentViewHolder.dislikeButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dislikeBtnPressed(commentViewHolder.likeButton, commentViewHolder.dislikeButton);
+                comments.get(i).setcVote(comments.get(i).getcVote() - 1);
+                notifyItemChanged(i);
+                notifyDataSetChanged();
+            }
+        });
     }
 
     private static void likeBtnPressed(ImageButton likebtn, ImageButton dislikebtn) {

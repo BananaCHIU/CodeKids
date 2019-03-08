@@ -9,13 +9,13 @@ public class Comment {
     private User cUser;
     private String cContent;
     private Date cTime;
-    private int cVote, cDislike;
+    private int cVote;
 
 
     public Comment(){}
 
-    public Comment(User user, String content, Date time, int vote, int dislike){
-        cUser=user; cContent=content; cTime=time; cVote=vote; cDislike = dislike;
+    public Comment(User user, String content, Date time, int vote){
+        cUser=user; cContent=content; cTime=time; cVote=vote;
     }
 
     public String getCuId() {
@@ -38,11 +38,11 @@ public class Comment {
 
     public int getcVote() { return cVote; }
 
-    public int getcDislike() { return cDislike; }
-
     public Post getParentPost() { return parentPost; }
 
     public void setParentPost(Post post) { parentPost = post; }
+
+    public void setcVote(int newVote) { cVote = newVote; }
 
     public static List<Comment> sampledata()
     {
@@ -60,19 +60,19 @@ public class Comment {
 
         Post post = new Post(pU, "Sample Title", "Sample Post Content", new Date());
 
-        Comment c1 = new Comment(cU1, "Sample first comment", new Date(), 10, 9);
+        Comment c1 = new Comment(cU1, "Sample first comment", new Date(), 10);
         sample.add(c1);
-        Comment c2 = new Comment(cU2, "Sample second comment", new Date(), 8, 7);
+        Comment c2 = new Comment(cU2, "Sample second comment", new Date(), 8);
         sample.add(c2);
-        Comment c3 = new Comment(cU3, "Sample third comment", new Date(), 6, 5);
+        Comment c3 = new Comment(cU3, "Sample third comment", new Date(), 6);
         sample.add(c3);
-        Comment c4 = new Comment(cU4, "Sample fourth comment", new Date(), 4, 3);
+        Comment c4 = new Comment(cU4, "Sample fourth comment", new Date(), 4);
         sample.add(c4);
-        Comment c5 = new Comment(cU5, "Sample fifth comment", new Date(), 2, 1);
+        Comment c5 = new Comment(cU5, "Sample fifth comment", new Date(), 2);
         sample.add(c5);
-        Comment c6 = new Comment(cU6, "Sample sixth comment", new Date(), 0, 1);
+        Comment c6 = new Comment(cU6, "Sample sixth comment", new Date(), 0);
         sample.add(c6);
-        Comment c7 = new Comment(cU7, "Sample seventh comment", new Date(), 2, 3);
+        Comment c7 = new Comment(cU7, "Sample seventh comment", new Date(), 3);
         sample.add(c7);
 
         for (int i = 0; i < sample.size(); i++)
