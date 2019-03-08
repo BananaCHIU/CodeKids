@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".NewPostActivity">
+    tools:context=".NewCommentActivity">
 
     <com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"
@@ -16,11 +16,10 @@
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
             android:background="?attr/colorPrimary"
-            android:elevation="4dp"
-            app:popupTheme="@style/AppTheme.PopupOverlay">
+            app:popupTheme="@style/AppTheme.PopupOverlay" >
 
             <Button
-                android:id="@+id/button_post"
+                android:id="@+id/button_post_cm"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_gravity="right"
@@ -31,7 +30,7 @@
                 android:textSize="14sp" />
 
             <ImageButton
-                android:id="@+id/button_cancel"
+                android:id="@+id/button_cancel_cm"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_gravity="start"
@@ -42,6 +41,6 @@
 
     </com.google.android.material.appbar.AppBarLayout>
 
-    <include layout="@layout/content_new_post" />
+    <include layout="@layout/content_new_comment" />
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

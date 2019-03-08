@@ -61,7 +61,7 @@ public class CommentRVAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
     @Override
     public void onBindViewHolder(final RecyclerView.ViewHolder VH, final int i)
     {
-        comments = Comment.sampledata();
+        //comments = Comment.sampledata();
         PrettyTime prettyTime = new PrettyTime(Locale.getDefault());
 
         final CommentViewHolder commentViewHolder = (CommentViewHolder) VH;
