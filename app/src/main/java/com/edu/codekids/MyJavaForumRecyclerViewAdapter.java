@@ -47,7 +47,6 @@ public class MyJavaForumRecyclerViewAdapter extends RecyclerView.Adapter<MyJavaF
     @Override
     public void onBindViewHolder(final PostViewHolder holder, final int i)
     {
-        posts = Post.samplePosts();
         PrettyTime prettyTime = new PrettyTime(Locale.getDefault());
 
         holder.postUser.setText(posts.get(i).getUserName());

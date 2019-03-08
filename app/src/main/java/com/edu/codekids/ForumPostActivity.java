@@ -24,7 +24,7 @@ import java.util.Locale;
 public class ForumPostActivity extends AppCompatActivity
 {
 
-    public static List<Comment> comments = Comment.sampledata();
+    public static List<Comment> comments;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
