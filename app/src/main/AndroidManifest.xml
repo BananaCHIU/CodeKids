@@ -10,6 +10,15 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
+            android:name=".NewCommentActivity"
+            android:label="@string/title_activity_new_comment"
+            android:parentActivityName=".ForumPostActivity"
+            android:theme="@style/AppTheme.NoActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.edu.codekids.ForumPostActivity" />
+        </activity>
+        <activity
             android:name=".NewPostActivity"
             android:label="@string/title_activity_new_post"
             android:parentActivityName=".SignedInActivity"
