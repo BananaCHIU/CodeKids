@@ -47,6 +47,14 @@
           }
         },
         {
+          "client_id": "245981083548-5mdn10o0c045ngepk0298ojptib8lmq7.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.edu.codekids",
+            "certificate_hash": "56af43a99490229c06791dad64bf4daea34a1707"
+          }
+        },
+        {
           "client_id": "245981083548-p8m00bu54siio5t3p017vesg2p0v23ha.apps.googleusercontent.com",
           "client_type": 3
         }
