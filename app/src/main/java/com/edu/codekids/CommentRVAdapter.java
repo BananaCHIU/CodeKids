@@ -74,8 +74,6 @@ public class CommentRVAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
             public void onClick(View v) {
                 likeBtnPressed(commentViewHolder.likeButton, commentViewHolder.dislikeButton);
                 comments.get(i).setcVote(comments.get(i).getcVote() + 1);
-                notifyItemChanged(i);
-                notifyDataSetChanged();
 
             }
         });
@@ -84,8 +82,6 @@ public class CommentRVAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
             public void onClick(View v) {
                 dislikeBtnPressed(commentViewHolder.likeButton, commentViewHolder.dislikeButton);
                 comments.get(i).setcVote(comments.get(i).getcVote() - 1);
-                notifyItemChanged(i);
-                notifyDataSetChanged();
             }
         });
     }
