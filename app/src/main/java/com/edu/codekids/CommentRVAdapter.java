@@ -72,41 +72,46 @@ public class CommentRVAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
         commentViewHolder.likeButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                likeBtnPressed(commentViewHolder.likeButton, commentViewHolder.dislikeButton);
-                comments.get(i).setcVote(comments.get(i).getcVote() + 1);
-
+                likeBtnPressed(commentViewHolder.likeButton, commentViewHolder.dislikeButton, i);
+                commentViewHolder.numlike.setText(Integer.toString(comments.get(i).getcVote()));
             }
         });
         commentViewHolder.dislikeButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                dislikeBtnPressed(commentViewHolder.likeButton, commentViewHolder.dislikeButton);
-                comments.get(i).setcVote(comments.get(i).getcVote() - 1);
+                dislikeBtnPressed(commentViewHolder.likeButton, commentViewHolder.dislikeButton, i);
+                commentViewHolder.numlike.setText(Integer.toString(comments.get(i).getcVote()));
             }
         });
     }
 
-    private static void likeBtnPressed(ImageButton likebtn, ImageButton dislikebtn) {
+    private void likeBtnPressed(ImageButton likebtn, ImageButton dislikebtn, int i) {
         float likealpha, dislikealpha;
         likealpha = likebtn.getAlpha(); dislikealpha = dislikebtn.getAlpha();
         if((likealpha == (float) 0.4) && (dislikealpha == (float) 1)){                //Disliked
             likebtn.setAlpha((float) 1); dislikebtn.setAlpha((float) 0.4);
+            comments.get(i).setcVote(comments.get(i).getcVote() + 2);                 //double add
         } else if ((dislikealpha == (float) 0.4) && (likealpha == (float) 1)){        //Liked
             likebtn.setAlpha((float) 0.4);
+            comments.get(i).setcVote(comments.get(i).getcVote() - 1);                 //reset
         } else if ((dislikealpha == (float) 0.4) && (likealpha == (float) 0.4)){      //No Select
             likebtn.setAlpha((float) 1);
+            comments.get(i).setcVote(comments.get(i).getcVote() + 1);                 //add
         }
     }
 
-    private static void dislikeBtnPressed(ImageButton likebtn, ImageButton dislikebtn) {
+    private void dislikeBtnPressed(ImageButton likebtn, ImageButton dislikebtn, int i) {
         float likealpha, dislikealpha;
         likealpha = likebtn.getAlpha(); dislikealpha = dislikebtn.getAlpha();
         if((likealpha == (float) 0.4) && (dislikealpha == (float) 1)){                //Disliked
             dislikebtn.setAlpha((float) 0.4);
+            comments.get(i).setcVote(comments.get(i).getcVote() + 1);                 //reset
         } else if ((dislikealpha == (float) 0.4) && (likealpha == (float) 1)){        //Liked
             likebtn.setAlpha((float) 0.4); dislikebtn.setAlpha((float) 1);
+            comments.get(i).setcVote(comments.get(i).getcVote() - 2);                 //double minus
         } else if ((dislikealpha == (float) 0.4) && (likealpha == (float) 0.4)){      //No Select
             dislikebtn.setAlpha((float) 1);
+            comments.get(i).setcVote(comments.get(i).getcVote() - 1);                 //minus
         }
     }
 
