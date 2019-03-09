@@ -57,7 +57,7 @@ public class RegisterActivity extends AppCompatActivity {
                 if (type.getCheckedRadioButtonId() == R.id.teacher) {
                     user = new User(uid, name.getText().toString(), "teacher");
                     addDocument(user);
-                } else if (type.getCheckedRadioButtonId() == R.id.teacher) {
+                } else if (type.getCheckedRadioButtonId() == R.id.student) {
                     user = new User(uid, name.getText().toString(), "student");
                     addDocument(user);
                 }
