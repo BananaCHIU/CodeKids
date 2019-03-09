@@ -30,10 +30,9 @@
             android:id="@+id/name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:fontFamily="sans-serif"
+            android:fontFamily="casual"
             android:includeFontPadding="true"
-            android:inputType="text"
-            android:paddingTop="10dp" />
+            android:inputType="text" />
 
     </com.google.android.material.textfield.TextInputLayout>
 
