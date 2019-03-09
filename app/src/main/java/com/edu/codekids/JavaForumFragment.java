@@ -29,7 +29,7 @@ public class JavaForumFragment extends Fragment {
     private static final String ARG_COLUMN_COUNT = "column-count";
     private int mColumnCount = 1;
     private OnJavaFragmentInteractionListener mListener;
-    private List<Post> posts;
+    private List<Post> posts = Post.samplePosts();
     /**
      * Mandatory empty constructor for the fragment manager to instantiate the
      * fragment (e.g. upon screen orientation changes).

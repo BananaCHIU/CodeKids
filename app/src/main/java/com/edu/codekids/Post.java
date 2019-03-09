@@ -17,12 +17,6 @@ public class Post {
 
     public User getUser() { return pUser; }
 
-    public String getUserID () { return pUser.getuId();}
-
-    public String getUserName() { return pUser.getuName();}
-
-    public String getUserType() { return pUser.getuType();}
-
     public Date getpTime() {
         return pTime;
     }

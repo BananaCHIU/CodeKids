@@ -49,7 +49,7 @@ public class MyJavaForumRecyclerViewAdapter extends RecyclerView.Adapter<MyJavaF
     {
         PrettyTime prettyTime = new PrettyTime(Locale.getDefault());
 
-        holder.postUser.setText(posts.get(i).getUserName());
+        holder.postUser.setText(posts.get(i).getUser().getuName());
         holder.postDate.setText(prettyTime.format(posts.get(i).getpTime()));
         holder.postTitle.setText(posts.get(i).getpTitle());
     }

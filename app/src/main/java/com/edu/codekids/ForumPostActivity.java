@@ -58,7 +58,7 @@ public class ForumPostActivity extends AppCompatActivity
         pDate = (TextView)findViewById(R.id.post_Date);
         pContent = (TextView)findViewById(R.id.post_Content);
 
-        pUserName.setText(comments.get(0).getParentPost().getUserName());
+        pUserName.setText(comments.get(0).getParentPost().getUser().getuName());
         pDate.setText(prettyTime.format(comments.get(0).getParentPost().getpTime()));
         pContent.setText(comments.get(0).getParentPost().getpContent());
 
