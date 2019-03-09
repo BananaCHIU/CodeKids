@@ -6,19 +6,31 @@ import java.util.List;
 
 public class Post {
     private User pUser;
-    private String pTitle, pContent;
+    private String pId, pTitle, pContent;
     private Date pTime;
 
     public Post(){}
 
-    public Post(User user,String title, String content, Date time){
-        pUser = user; pTitle =title; pContent=content; pTime=time;
+    public Post(User user,String id, String title, String content, Date time){
+        pUser = user; pId = id; pTitle =title; pContent=content; pTime=time;
     }
 
     public User getUser() { return pUser; }
 
+    public void setpUser(User pUser) {
+        this.pUser = pUser;
+    }
+
     public Date getpTime() {
         return pTime;
+    }
+
+    public String getpId() {
+        return pId;
+    }
+
+    public void setpId(String pId) {
+        this.pId = pId;
     }
 
     public String getpContent() {
@@ -28,7 +40,7 @@ public class Post {
     public String getpTitle() {
         return pTitle;
     }
-
+/*
     public static List<Post> samplePosts()
     {
         ArrayList<Post> posts= new ArrayList<Post>();
@@ -50,4 +62,5 @@ public class Post {
 
         return posts;
     }
+    */
 }

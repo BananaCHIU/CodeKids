@@ -43,7 +43,7 @@ public class Comment {
     public void setParentPost(Post post) { parentPost = post; }
 
     public void setcVote(int newVote) { cVote = newVote; }
-
+    /*
     public static List<Comment> sampledata()
     {
         ArrayList<Comment> sample = new ArrayList<Comment>();
@@ -82,4 +82,5 @@ public class Comment {
 
         return sample;
     }
+    */
 }

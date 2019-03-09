@@ -18,6 +18,7 @@ import com.edu.codekids.dummy.DummyContent.DummyItem;
 import org.ocpsoft.prettytime.PrettyTime;
 
 import java.security.CryptoPrimitive;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
@@ -29,7 +30,7 @@ import java.util.Locale;
 public class MyJavaForumRecyclerViewAdapter extends RecyclerView.Adapter<MyJavaForumRecyclerViewAdapter.PostViewHolder>
 {
 
-    List<Post> posts;
+    List<Post> posts = new ArrayList<Post>();
 
 
     public MyJavaForumRecyclerViewAdapter(List<Post> items)

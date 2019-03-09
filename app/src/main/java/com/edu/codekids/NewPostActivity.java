@@ -70,11 +70,11 @@ public class NewPostActivity extends AppCompatActivity {
         TextView title = (TextView) findViewById(R.id.inputTitle);
         TextView content = (TextView) findViewById(R.id.inputContent);
         currentUser = SignedInActivity.getCurrentuser();
-        Post post = new Post(currentUser, title.getText().toString(), content.getText().toString(), time);
+        Post post = new Post(currentUser, null,title.getText().toString(), content.getText().toString(), time);
         addDocument(post);
     }
 
-    private void addDocument(Post post){
+    private void addDocument(final Post post){
         if (lang.equals("Java")) {
             FirebaseFirestore db = FirebaseFirestore.getInstance();
             db.collection("javaPost").add(post)
@@ -82,6 +82,20 @@ public class NewPostActivity extends AppCompatActivity {
                         @Override
                         public void onSuccess(DocumentReference documentReference) {
                             Log.d(TAG, "DocumentSnapshot written with ID: " + documentReference.getId());
+                            post.setpId(documentReference.getId());
+                            documentReference.update("pId", post.getpId())
+                                    .addOnSuccessListener(new OnSuccessListener<Void>() {
+                                        @Override
+                                        public void onSuccess(Void aVoid) {
+                                            Log.d(TAG, "DocumentSnapshot successfully updated!");
+                                        }
+                                    })
+                                    .addOnFailureListener(new OnFailureListener() {
+                                        @Override
+                                        public void onFailure(@NonNull Exception e) {
+                                            Log.w(TAG, "Error updating document", e);
+                                        }
+                                    });
                             finish();
                         }
                     })
