@@ -74,7 +74,7 @@ public class JavaForumFragment extends Fragment {
     {
         View view = inflater.inflate(R.layout.fragment_javaforum_list, container, false);
         FirebaseFirestore db = FirebaseFirestore.getInstance();
-        CollectionReference colRef = db.collection("javaPost");
+        final CollectionReference colRef = db.collection("javaPost");
                 colRef.get()
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                     @Override
@@ -82,13 +82,11 @@ public class JavaForumFragment extends Fragment {
                         if (task.isSuccessful()) {
                             for (QueryDocumentSnapshot document : task.getResult()) {
                                 Log.d(TAG, document.getId() + " => " + document.getData());
-                                Map<String, Object> map =  document.getData();
-                                Post post = new Post((User)map.get("user"), map.get("pId").toString(), map.get("pTitle").toString(), map.get("pContent").toString(), (Date)map.get("pTime"));
-                                //User temp = new User(obj.toString());
-                                //Post post = document.toObject(Post.class);
-
-                                //Post post = map;
-                                posts.add(document.toObject(Post.class));
+                                HashMap map  = (HashMap) document.get("user");
+                                User temp = new User (map.get("uId").toString(), map.get("uName").toString(), map.get("uType").toString());
+                                Post post = document.toObject(Post.class);
+                                post.setpUser(temp);
+                                posts.add(post);
 
                             }
                             if (posts.size() == 0){
