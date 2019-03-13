@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -42,6 +43,7 @@ public class JavaForumFragment extends Fragment {
     private static final String ARG_COLUMN_COUNT = "column-count";
     private static final String TAG = "Message: ";
     private int mColumnCount = 1;
+    private SwipeRefreshLayout mySwipeRefreshLayout;
     private OnJavaFragmentInteractionListener mListener;
     private List<Post> posts = new ArrayList<Post>();
     /**
@@ -49,6 +51,38 @@ public class JavaForumFragment extends Fragment {
      * fragment (e.g. upon screen orientation changes).
      */
     public JavaForumFragment() {
+    }
+
+    private void refresh(final View view){
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
+        CollectionReference colRef = db.collection("javaPost");
+        colRef.get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        if (task.isSuccessful()) {
+                            posts.clear();
+                            for (QueryDocumentSnapshot document : task.getResult()) {
+                                Log.d(TAG, document.getId() + " => " + document.getData());
+                                HashMap map  = (HashMap) document.get("user");
+                                User temp = new User (map.get("uId").toString(), map.get("uName").toString(), map.get("uType").toString());
+                                Post post = document.toObject(Post.class);
+                                post.setpUser(temp);
+                                posts.add(post);
+
+                            }
+                            RecyclerView recyclerView = (RecyclerView) view.findViewById(R.id.forum_RecyclerView);
+                            recyclerView.setLayoutManager(new LinearLayoutManager(view.getContext()));
+                            recyclerView.setAdapter(new MyJavaForumRecyclerViewAdapter(posts));
+                            if (posts.size() == 0){
+                                Toast.makeText(getActivity(), "No post in the forum",
+                                        Toast.LENGTH_LONG).show();
+                            }
+                        } else {
+                            Log.d(TAG, "Error getting documents: ", task.getException());
+                        }
+                    }
+                });
     }
 
     @SuppressWarnings("unused")
@@ -73,34 +107,27 @@ public class JavaForumFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
     {
         final View view = inflater.inflate(R.layout.fragment_javaforum_list, container, false);
-        FirebaseFirestore db = FirebaseFirestore.getInstance();
-        CollectionReference colRef = db.collection("javaPost");
-                colRef.get()
-                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-                    @Override
-                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                        if (task.isSuccessful()) {
-                            for (QueryDocumentSnapshot document : task.getResult()) {
-                                Log.d(TAG, document.getId() + " => " + document.getData());
-                                HashMap map  = (HashMap) document.get("user");
-                                User temp = new User (map.get("uId").toString(), map.get("uName").toString(), map.get("uType").toString());
-                                Post post = document.toObject(Post.class);
-                                post.setpUser(temp);
-                                posts.add(post);
 
-                            }
-                            RecyclerView recyclerView = (RecyclerView)view.findViewById(R.id.forum_RecyclerView);
-                            recyclerView.setLayoutManager(new LinearLayoutManager(view.getContext()));
-                            recyclerView.setAdapter(new MyJavaForumRecyclerViewAdapter(posts));
-                            if (posts.size() == 0){
-                                Toast.makeText(getActivity(), "No post in the forum",
-                                        Toast.LENGTH_LONG).show();
-                            }
-                        } else {
-                            Log.d(TAG, "Error getting documents: ", task.getException());
-                        }
+        refresh(view);
+        mySwipeRefreshLayout = (SwipeRefreshLayout) view.findViewById(R.id.swipe_container);
+        mySwipeRefreshLayout.setColorSchemeResources(R.color.colorPrimary,
+                android.R.color.holo_green_dark,
+                android.R.color.holo_orange_dark,
+                android.R.color.holo_blue_dark);
+        mySwipeRefreshLayout.setOnRefreshListener(
+                new SwipeRefreshLayout.OnRefreshListener() {
+                    @Override
+                    public void onRefresh() {
+                        Log.i(TAG, "onRefresh called from SwipeRefreshLayout");
+
+                        // This method performs the actual data-refresh operation.
+                        // The method calls setRefreshing(false) when it's finished.
+                        refresh(view);
+                        mySwipeRefreshLayout.setRefreshing(false);
                     }
-                });
+                }
+        );
+
         return view;
     }
 
