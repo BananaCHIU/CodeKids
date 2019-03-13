@@ -72,9 +72,9 @@ public class JavaForumFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
     {
-        View view = inflater.inflate(R.layout.fragment_javaforum_list, container, false);
+        final View view = inflater.inflate(R.layout.fragment_javaforum_list, container, false);
         FirebaseFirestore db = FirebaseFirestore.getInstance();
-        final CollectionReference colRef = db.collection("javaPost");
+        CollectionReference colRef = db.collection("javaPost");
                 colRef.get()
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                     @Override
@@ -89,6 +89,9 @@ public class JavaForumFragment extends Fragment {
                                 posts.add(post);
 
                             }
+                            RecyclerView recyclerView = (RecyclerView)view.findViewById(R.id.forum_RecyclerView);
+                            recyclerView.setLayoutManager(new LinearLayoutManager(view.getContext()));
+                            recyclerView.setAdapter(new MyJavaForumRecyclerViewAdapter(posts));
                             if (posts.size() == 0){
                                 Toast.makeText(getActivity(), "No post in the forum",
                                         Toast.LENGTH_LONG).show();
@@ -98,9 +101,6 @@ public class JavaForumFragment extends Fragment {
                         }
                     }
                 });
-        RecyclerView recyclerView = (RecyclerView)view.findViewById(R.id.forum_RecyclerView);
-        recyclerView.setLayoutManager(new LinearLayoutManager(view.getContext()));
-        recyclerView.setAdapter(new MyJavaForumRecyclerViewAdapter(posts));
         return view;
     }
 

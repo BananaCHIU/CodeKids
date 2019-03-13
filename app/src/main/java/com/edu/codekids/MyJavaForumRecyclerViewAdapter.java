@@ -30,7 +30,7 @@ import java.util.Locale;
 public class MyJavaForumRecyclerViewAdapter extends RecyclerView.Adapter<MyJavaForumRecyclerViewAdapter.PostViewHolder>
 {
 
-    List<Post> posts = new ArrayList<Post>();
+    List<Post> posts;
 
 
     public MyJavaForumRecyclerViewAdapter(List<Post> items)
