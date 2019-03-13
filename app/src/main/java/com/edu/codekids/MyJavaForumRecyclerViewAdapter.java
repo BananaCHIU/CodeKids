@@ -13,7 +13,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.edu.codekids.JavaForumFragment.OnJavaFragmentInteractionListener;
-import com.edu.codekids.dummy.DummyContent.DummyItem;
 
 import org.ocpsoft.prettytime.PrettyTime;
 
@@ -22,11 +21,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
-/**
- * {@link RecyclerView.Adapter} that can display a {@link DummyItem} and makes a call to the
- * specified {@link OnJavaFragmentInteractionListener}.
- * TODO: Replace the implementation with code for your data type.
- */
 public class MyJavaForumRecyclerViewAdapter extends RecyclerView.Adapter<MyJavaForumRecyclerViewAdapter.PostViewHolder>
 {
 
@@ -46,7 +40,7 @@ public class MyJavaForumRecyclerViewAdapter extends RecyclerView.Adapter<MyJavaF
     }
 
     @Override
-    public void onBindViewHolder(final PostViewHolder holder, final int i)
+    public void onBindViewHolder(final PostViewHolder holder, int i)
     {
         PrettyTime prettyTime = new PrettyTime(Locale.getDefault());
 

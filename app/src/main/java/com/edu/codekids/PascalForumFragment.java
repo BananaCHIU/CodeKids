@@ -2,18 +2,28 @@ package com.edu.codekids;
 
 import android.content.Context;
 import android.os.Bundle;
-
-import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.GridLayoutManager;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
-import com.edu.codekids.dummy.DummyContent;
-import com.edu.codekids.dummy.DummyContent.DummyItem;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+
+import androidx.annotation.NonNull;
+import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 /**
  * A fragment representing a list of Items.
@@ -23,11 +33,13 @@ import com.edu.codekids.dummy.DummyContent.DummyItem;
  */
 public class PascalForumFragment extends Fragment {
 
-    // TODO: Customize parameter argument names
     private static final String ARG_COLUMN_COUNT = "column-count";
-    // TODO: Customize parameters
+    private static final String TAG = "Message: ";
     private int mColumnCount = 1;
+    private SwipeRefreshLayout mySwipeRefreshLayout;
+    private List<Post> posts = new ArrayList<Post>();
     private OnPascalFragmentInteractionListener mListener;
+    private View view;
 
     /**
      * Mandatory empty constructor for the fragment manager to instantiate the
@@ -36,8 +48,38 @@ public class PascalForumFragment extends Fragment {
     public PascalForumFragment() {
     }
 
-    // TODO: Customize parameter initialization
-    @SuppressWarnings("unused")
+    private void refresh(){
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
+        CollectionReference colRef = db.collection("pascalPost");
+        colRef.get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        if (task.isSuccessful()) {
+                            posts.clear();
+                            for (QueryDocumentSnapshot document : task.getResult()) {
+                                Log.d(TAG, document.getId() + " => " + document.getData());
+                                HashMap map  = (HashMap) document.get("user");
+                                User temp = new User (map.get("uId").toString(), map.get("uName").toString(), map.get("uType").toString());
+                                Post post = document.toObject(Post.class);
+                                post.setpUser(temp);
+                                posts.add(post);
+
+                            }
+                            RecyclerView recyclerView = (RecyclerView) view.findViewById(R.id.pasforum_RecyclerView);
+                            recyclerView.setLayoutManager(new LinearLayoutManager(view.getContext()));
+                            recyclerView.setAdapter(new MyJavaForumRecyclerViewAdapter(posts));
+                            if (posts.size() == 0){
+                                Toast.makeText(getActivity(), "No post in the Pascal forum",
+                                        Toast.LENGTH_LONG).show();
+                            }
+                        } else {
+                            Log.d(TAG, "Error getting documents: ", task.getException());
+                        }
+                    }
+                });
+    }
+
     public static PascalForumFragment newInstance(int columnCount) {
         PascalForumFragment fragment = new PascalForumFragment();
         Bundle args = new Bundle();
@@ -58,19 +100,28 @@ public class PascalForumFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_pascalforum_list, container, false);
+        view = inflater.inflate(R.layout.fragment_pascalforum_list, container, false);
 
         // Set the adapter
-        if (view instanceof RecyclerView) {
-            Context context = view.getContext();
-            RecyclerView recyclerView = (RecyclerView) view;
-            if (mColumnCount <= 1) {
-                recyclerView.setLayoutManager(new LinearLayoutManager(context));
-            } else {
-                recyclerView.setLayoutManager(new GridLayoutManager(context, mColumnCount));
-            }
-            recyclerView.setAdapter(new MyPascalForumRecyclerViewAdapter(DummyContent.ITEMS, mListener));
-        }
+        refresh();
+        mySwipeRefreshLayout = (SwipeRefreshLayout) view.findViewById(R.id.pas_swipe_container);
+        mySwipeRefreshLayout.setColorSchemeResources(R.color.colorPrimary,
+                android.R.color.holo_green_dark,
+                android.R.color.holo_orange_dark,
+                android.R.color.holo_blue_dark);
+        mySwipeRefreshLayout.setOnRefreshListener(
+                new SwipeRefreshLayout.OnRefreshListener() {
+                    @Override
+                    public void onRefresh() {
+                        Log.i(TAG, "onRefresh called from SwipeRefreshLayout");
+
+                        // This method performs the actual data-refresh operation.
+                        // The method calls setRefreshing(false) when it's finished.
+                        refresh();
+                        mySwipeRefreshLayout.setRefreshing(false);
+                    }
+                }
+        );
         return view;
     }
 
@@ -78,6 +129,7 @@ public class PascalForumFragment extends Fragment {
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
+        refresh();
         if (context instanceof OnPascalFragmentInteractionListener) {
             mListener = (OnPascalFragmentInteractionListener) context;
         } else {
@@ -104,6 +156,6 @@ public class PascalForumFragment extends Fragment {
      */
     public interface OnPascalFragmentInteractionListener {
         // TODO: Update argument type and name
-        void onListFragmentInteraction(DummyItem item);
+
     }
 }

@@ -2,23 +2,12 @@ package com.edu.codekids;
 
 import android.content.Context;
 import android.os.Bundle;
-
-import androidx.annotation.NonNull;
-import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.DividerItemDecoration;
-import androidx.recyclerview.widget.GridLayoutManager;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
-
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
-import com.edu.codekids.dummy.DummyContent;
-import com.edu.codekids.dummy.DummyContent.DummyItem;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.CollectionReference;
@@ -27,10 +16,14 @@ import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
+
+import androidx.annotation.NonNull;
+import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 /**
  * A fragment representing a list of Items.
@@ -46,6 +39,7 @@ public class JavaForumFragment extends Fragment {
     private SwipeRefreshLayout mySwipeRefreshLayout;
     private OnJavaFragmentInteractionListener mListener;
     private List<Post> posts = new ArrayList<Post>();
+    private View view;
     /**
      * Mandatory empty constructor for the fragment manager to instantiate the
      * fragment (e.g. upon screen orientation changes).
@@ -53,7 +47,7 @@ public class JavaForumFragment extends Fragment {
     public JavaForumFragment() {
     }
 
-    private void refresh(final View view){
+    private void refresh(){
         FirebaseFirestore db = FirebaseFirestore.getInstance();
         CollectionReference colRef = db.collection("javaPost");
         colRef.get()
@@ -75,7 +69,7 @@ public class JavaForumFragment extends Fragment {
                             recyclerView.setLayoutManager(new LinearLayoutManager(view.getContext()));
                             recyclerView.setAdapter(new MyJavaForumRecyclerViewAdapter(posts));
                             if (posts.size() == 0){
-                                Toast.makeText(getActivity(), "No post in the forum",
+                                Toast.makeText(getActivity(), "No post in the Java forum",
                                         Toast.LENGTH_LONG).show();
                             }
                         } else {
@@ -106,9 +100,9 @@ public class JavaForumFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
     {
-        final View view = inflater.inflate(R.layout.fragment_javaforum_list, container, false);
+        view = inflater.inflate(R.layout.fragment_javaforum_list, container, false);
 
-        refresh(view);
+        refresh();
         mySwipeRefreshLayout = (SwipeRefreshLayout) view.findViewById(R.id.swipe_container);
         mySwipeRefreshLayout.setColorSchemeResources(R.color.colorPrimary,
                 android.R.color.holo_green_dark,
@@ -122,7 +116,7 @@ public class JavaForumFragment extends Fragment {
 
                         // This method performs the actual data-refresh operation.
                         // The method calls setRefreshing(false) when it's finished.
-                        refresh(view);
+                        refresh();
                         mySwipeRefreshLayout.setRefreshing(false);
                     }
                 }
@@ -135,6 +129,7 @@ public class JavaForumFragment extends Fragment {
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
+        refresh();
         if (context instanceof OnJavaFragmentInteractionListener) {
             mListener = (OnJavaFragmentInteractionListener) context;
         } else {
@@ -161,6 +156,6 @@ public class JavaForumFragment extends Fragment {
      */
     public interface OnJavaFragmentInteractionListener {
         // TODO: Update argument type and name
-        void onListFragmentInteraction(DummyItem item);
+
     }
 }
