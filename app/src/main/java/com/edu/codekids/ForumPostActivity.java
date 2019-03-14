@@ -73,6 +73,18 @@ public class ForumPostActivity extends AppCompatActivity
         CommentRVAdapter adapter = new CommentRVAdapter(post.getpComments());
         rv.setAdapter(adapter);
 
+    }
+
+    public void newCommentBtnClicked(View v){
+        Intent intent = new Intent(this, NewCommentActivity.class);
+        intent.putExtra("post", post);
+        startActivity(intent);
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        //Need to refresh after posting new comment
 
     }
 }

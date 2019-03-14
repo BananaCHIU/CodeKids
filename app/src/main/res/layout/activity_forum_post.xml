@@ -36,6 +36,8 @@
 
     </com.google.android.material.appbar.AppBarLayout>
 
-    <include layout="@layout/content_forum_post" />
+    <include
+        android:id="@+id/include"
+        layout="@layout/content_forum_post" />
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
