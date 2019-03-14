@@ -1,6 +1,5 @@
 package com.edu.codekids;
 
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -8,6 +7,7 @@ public class Post {
     private User pUser;
     private String pId, pTitle, pContent;
     private Date pTime;
+    private List<Comment> pComments;
 
     public Post(){}
 
@@ -40,6 +40,10 @@ public class Post {
     public String getpTitle() {
         return pTitle;
     }
+
+    public List<Comment> getpComments() { return pComments; }
+
+    public void setpComments(List<Comment> comments) { pComments = comments; }
 /*
     public static List<Post> samplePosts()
     {

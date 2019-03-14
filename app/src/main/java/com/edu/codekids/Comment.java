@@ -1,11 +1,8 @@
 package com.edu.codekids;
 
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
 
 public class Comment {
-    private Post parentPost;
     private User cUser;
     private String cContent;
     private Date cTime;
@@ -37,10 +34,6 @@ public class Comment {
     }
 
     public int getcVote() { return cVote; }
-
-    public Post getParentPost() { return parentPost; }
-
-    public void setParentPost(Post post) { parentPost = post; }
 
     public void setcVote(int newVote) { cVote = newVote; }
     /*

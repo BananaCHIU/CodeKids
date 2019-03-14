@@ -24,7 +24,7 @@ import java.util.Locale;
 public class ForumPostActivity extends AppCompatActivity
 {
 
-    public static List<Comment> comments;
+    public static Post post;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -35,7 +35,7 @@ public class ForumPostActivity extends AppCompatActivity
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         TextView textView = (TextView)toolbar.findViewById(R.id.toolbarTextView);
-        textView.setText(comments.get(0).getParentPost().getpTitle());
+        textView.setText(post.getpTitle());
         getSupportActionBar().setDisplayShowTitleEnabled(false);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
@@ -58,15 +58,15 @@ public class ForumPostActivity extends AppCompatActivity
         pDate = (TextView)findViewById(R.id.post_Date);
         pContent = (TextView)findViewById(R.id.post_Content);
 
-        pUserName.setText(comments.get(0).getParentPost().getUser().getuName());
-        pDate.setText(prettyTime.format(comments.get(0).getParentPost().getpTime()));
-        pContent.setText(comments.get(0).getParentPost().getpContent());
+        pUserName.setText(post.getUser().getuName());
+        pDate.setText(prettyTime.format(post.getpTime()));
+        pContent.setText(post.getpContent());
 
         RecyclerView rv = (RecyclerView)findViewById(R.id.comment_RecyclerView);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
         rv.setLayoutManager(linearLayoutManager);
         rv.setNestedScrollingEnabled(false);
-        CommentRVAdapter adapter = new CommentRVAdapter(comments);
+        CommentRVAdapter adapter = new CommentRVAdapter(post.getpComments());
         rv.setAdapter(adapter);
 
 
