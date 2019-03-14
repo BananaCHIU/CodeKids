@@ -18,6 +18,7 @@ import android.widget.TextView;
 
 import org.ocpsoft.prettytime.PrettyTime;
 
+import java.io.Serializable;
 import java.util.List;
 import java.util.Locale;
 
@@ -32,6 +33,7 @@ public class ForumPostActivity extends AppCompatActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_forum_post);
 
+        post = (Post) getIntent().getSerializableExtra("post");
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         TextView textView = (TextView)toolbar.findViewById(R.id.toolbarTextView);
@@ -51,12 +53,14 @@ public class ForumPostActivity extends AppCompatActivity
         final TextView pUserName;
         final TextView pDate;
         final TextView pContent;
+        final FloatingActionButton newComment;
         PrettyTime prettyTime = new PrettyTime(Locale.getDefault());
 
         pCV = (CardView)findViewById(R.id.post_CardView);
         pUserName = (TextView)findViewById(R.id.post_UserName);
         pDate = (TextView)findViewById(R.id.post_Date);
         pContent = (TextView)findViewById(R.id.post_Content);
+        newComment = (FloatingActionButton) findViewById(R.id.btn_new_comment);
 
         pUserName.setText(post.getUser().getuName());
         pDate.setText(prettyTime.format(post.getpTime()));

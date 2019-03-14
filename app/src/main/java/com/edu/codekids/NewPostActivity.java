@@ -21,11 +21,14 @@ import androidx.appcompat.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 public class NewPostActivity extends AppCompatActivity {
     private static final String TAG = "Message: ";
@@ -38,6 +41,8 @@ public class NewPostActivity extends AppCompatActivity {
 
         ImageButton cancel = (ImageButton) findViewById(R.id.button_cancel);
         Button postBtn = (Button) findViewById(R.id.button_post);
+        final EditText title = (EditText) findViewById(R.id.inputTitle);
+        final EditText content = (EditText) findViewById(R.id.inputContent);
         ChipGroup chipGroup = (ChipGroup) findViewById(R.id.chip_group);
         chipGroup.setOnCheckedChangeListener(new ChipGroup.OnCheckedChangeListener() {
             @Override
@@ -51,7 +56,12 @@ public class NewPostActivity extends AppCompatActivity {
         postBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                uploadPost();
+
+                if(!((title.getText().toString().isEmpty()) || (content.getText().toString().isEmpty()) || (lang == null))){
+                    uploadPost(title, content);
+                }else {
+                    Toast.makeText(NewPostActivity.this, "Please Fill in All Fields", Toast.LENGTH_LONG).show();
+                }
             }
         });
 
@@ -65,12 +75,11 @@ public class NewPostActivity extends AppCompatActivity {
 
     }
 
-    private void uploadPost(){
+    private void uploadPost(TextView title, TextView content){
         Date time = new Date();
-        TextView title = (TextView) findViewById(R.id.inputTitle);
-        TextView content = (TextView) findViewById(R.id.inputContent);
         currentUser = SignedInActivity.getCurrentuser();
-        Post post = new Post(currentUser, null,title.getText().toString(), content.getText().toString(), time);
+        List<Comment> comments = new ArrayList<Comment>();
+        Post post = new Post(currentUser, null,title.getText().toString(), content.getText().toString(), time, comments);
         addDocument(post);
     }
 

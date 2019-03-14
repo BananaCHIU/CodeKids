@@ -6,6 +6,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.app.Activity;
 import android.app.Application;
 import android.content.Intent;
+import android.os.Parcelable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,6 +17,7 @@ import com.edu.codekids.JavaForumFragment.OnJavaFragmentInteractionListener;
 
 import org.ocpsoft.prettytime.PrettyTime;
 
+import java.io.Serializable;
 import java.security.CryptoPrimitive;
 import java.util.ArrayList;
 import java.util.List;
@@ -24,7 +26,7 @@ import java.util.Locale;
 public class MyJavaForumRecyclerViewAdapter extends RecyclerView.Adapter<MyJavaForumRecyclerViewAdapter.PostViewHolder>
 {
 
-    List<Post> posts;
+    static List<Post> posts;
 
 
     public MyJavaForumRecyclerViewAdapter(List<Post> items)
@@ -42,11 +44,23 @@ public class MyJavaForumRecyclerViewAdapter extends RecyclerView.Adapter<MyJavaF
     @Override
     public void onBindViewHolder(final PostViewHolder holder, int i)
     {
+        final Post post = posts.get(i);
         PrettyTime prettyTime = new PrettyTime(Locale.getDefault());
 
         holder.postUser.setText(posts.get(i).getUser().getuName());
         holder.postDate.setText(prettyTime.format(posts.get(i).getpTime()));
         holder.postTitle.setText(posts.get(i).getpTitle());
+
+        holder.itemView.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View v)
+            {
+                Intent intent = new Intent(v.getContext(), ForumPostActivity.class);
+                intent.putExtra("post", post);
+                v.getContext().startActivity(intent);
+            }
+        });
     }
 
     @Override
@@ -68,15 +82,6 @@ public class MyJavaForumRecyclerViewAdapter extends RecyclerView.Adapter<MyJavaF
             postUser = (TextView)itemView.findViewById(R.id.forum_PostUser);
             postDate = (TextView)itemView.findViewById(R.id.forum_PostDate);
             postTitle = (TextView)itemView.findViewById(R.id.forum_PostTitle);
-            view.setOnClickListener(new View.OnClickListener()
-            {
-                @Override
-                public void onClick(View v)
-                {
-                    Intent intent = new Intent(v.getContext(), ForumPostActivity.class);
-                    v.getContext().startActivity(intent);
-                }
-            });
         }
     }
 }

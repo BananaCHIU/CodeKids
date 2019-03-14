@@ -18,7 +18,7 @@ import java.util.Locale;
 
 public class MyPascalForumRecyclerViewAdapter extends RecyclerView.Adapter<MyPascalForumRecyclerViewAdapter.PostViewHolder> {
 
-    List<Post> posts;
+    static List<Post> posts;
 
     public MyPascalForumRecyclerViewAdapter(List<Post> items)
     {
@@ -34,11 +34,24 @@ public class MyPascalForumRecyclerViewAdapter extends RecyclerView.Adapter<MyPas
 
     @Override
     public void onBindViewHolder(final PostViewHolder holder, int i) {
+
+        final Post post = posts.get(i);
         PrettyTime prettyTime = new PrettyTime(Locale.getDefault());
 
         holder.postUser.setText(posts.get(i).getUser().getuName());
         holder.postDate.setText(prettyTime.format(posts.get(i).getpTime()));
         holder.postTitle.setText(posts.get(i).getpTitle());
+
+        holder.itemView.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View v)
+            {
+                Intent intent = new Intent(v.getContext(), ForumPostActivity.class);
+                intent.putExtra("post", post);
+                v.getContext().startActivity(intent);
+            }
+        });
     }
 
     @Override
@@ -59,15 +72,6 @@ public class MyPascalForumRecyclerViewAdapter extends RecyclerView.Adapter<MyPas
             postUser = (TextView)itemView.findViewById(R.id.pasforum_PostUser);
             postDate = (TextView)itemView.findViewById(R.id.pasforum_PostDate);
             postTitle = (TextView)itemView.findViewById(R.id.pasforum_PostTitle);
-            view.setOnClickListener(new View.OnClickListener()
-            {
-                @Override
-                public void onClick(View v)
-                {
-                    Intent intent = new Intent(v.getContext(), ForumPostActivity.class);
-                    v.getContext().startActivity(intent);
-                }
-            });
         }
     }
 }
