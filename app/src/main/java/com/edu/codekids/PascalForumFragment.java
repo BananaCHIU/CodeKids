@@ -68,7 +68,7 @@ public class PascalForumFragment extends Fragment {
                             }
                             RecyclerView recyclerView = (RecyclerView) view.findViewById(R.id.pasforum_RecyclerView);
                             recyclerView.setLayoutManager(new LinearLayoutManager(view.getContext()));
-                            recyclerView.setAdapter(new MyJavaForumRecyclerViewAdapter(posts));
+                            recyclerView.setAdapter(new MyPascalForumRecyclerViewAdapter(posts));
                             if (posts.size() == 0){
                                 Toast.makeText(getActivity(), "No post in the Pascal forum",
                                         Toast.LENGTH_LONG).show();
@@ -134,7 +134,7 @@ public class PascalForumFragment extends Fragment {
             mListener = (OnPascalFragmentInteractionListener) context;
         } else {
             throw new RuntimeException(context.toString()
-                    + " must implement OnJavaFragmentInteractionListener");
+                    + " must implement OnPascalFragmentInteractionListener");
         }
     }
 
