@@ -78,7 +78,7 @@ public class NewPostActivity extends AppCompatActivity {
         Date time = new Date();
         currentUser = SignedInActivity.getCurrentuser();
         List<Comment> comments = new ArrayList<Comment>();
-        Post post = new Post(currentUser, null,title.getText().toString(), content.getText().toString(), time, comments);
+        Post post = new Post(currentUser, null,title.getText().toString(), content.getText().toString(),lang , time, comments);
         addDocument(post);
     }
 

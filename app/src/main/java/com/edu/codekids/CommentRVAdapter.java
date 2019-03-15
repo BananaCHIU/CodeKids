@@ -64,7 +64,7 @@ public class CommentRVAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
         PrettyTime prettyTime = new PrettyTime(Locale.getDefault());
 
         final CommentViewHolder commentViewHolder = (CommentViewHolder) VH;
-        commentViewHolder.userName.setText(comments.get(i).getCuName());
+        commentViewHolder.userName.setText(comments.get(i).getcUser().getuName());
         commentViewHolder.date.setText(prettyTime.format(comments.get(i).getcTime()));
         commentViewHolder.c_content.setText(comments.get(i).getcContent());
         commentViewHolder.numlike.setText(Integer.toString(comments.get(i).getcVote()));

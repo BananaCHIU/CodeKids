@@ -6,14 +6,14 @@ import java.util.List;
 
 public class Post implements Serializable {
     private User pUser;
-    private String pId, pTitle, pContent;
+    private String pId, pTitle, pContent, pLang;
     private Date pTime;
     private List<Comment> pComments;
 
     public Post(){}
 
-    public Post(User user,String id, String title, String content, Date time, List<Comment> comments){
-        pUser = user; pId = id; pTitle =title; pContent=content; pTime=time; pComments = comments;
+    public Post(User user,String id, String title, String content, String lang, Date time, List<Comment> comments){
+        pUser = user; pId = id; pTitle =title; pContent=content; pLang=lang; pTime=time; pComments = comments;
     }
 
     public User getUser() { return pUser; }
@@ -36,6 +36,10 @@ public class Post implements Serializable {
 
     public String getpContent() {
         return pContent;
+    }
+
+    public String getpLang() {
+        return pLang;
     }
 
     public String getpTitle() {

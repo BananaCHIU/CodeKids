@@ -16,15 +16,9 @@ public class Comment implements Serializable {
         cUser=user; cContent=content; cTime=time; cVote=vote;
     }
 
-    public String getCuId() {
-        return cUser.getuId();
+    public User getcUser() {
+        return cUser;
     }
-
-    public String getCuName() {
-        return cUser.getuName();
-    }
-
-    public String getCuType() { return cUser.getuType(); }
 
     public String getcContent() {
         return cContent;

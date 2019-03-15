@@ -25,7 +25,6 @@
                 android:layout_gravity="right"
                 android:background="?attr/selectableItemBackgroundBorderless"
                 android:fontFamily="casual"
-                android:onClick="postBtnClicked"
                 android:text="POST"
                 android:textColor="@color/colorOnPrimary"
                 android:textSize="14sp" />
@@ -36,7 +35,6 @@
                 android:layout_height="match_parent"
                 android:layout_gravity="start"
                 android:background="?attr/selectableItemBackgroundBorderless"
-                android:onClick="cancelBtnClicked"
                 android:src="@drawable/baseline_clear_white_24" />
 
         </androidx.appcompat.widget.Toolbar>
