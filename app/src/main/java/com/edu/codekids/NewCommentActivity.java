@@ -22,6 +22,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.TextView;
 
 import java.sql.Time;
 import java.util.ArrayList;
@@ -33,9 +34,10 @@ public class NewCommentActivity extends AppCompatActivity {
 
     private static final String TAG = "Message: ";
     Post post;
-    User user = SignedInActivity.getCurrentuser();
+    User user;
     List<Comment> comments = new ArrayList<Comment>();
-    EditText title, content;
+    EditText content;
+    TextView title;
     ImageButton btn_cancel;
     Button btn_post;
 
@@ -47,7 +49,7 @@ public class NewCommentActivity extends AppCompatActivity {
         Toolbar toolbar = findViewById(R.id.toolbar);
         btn_post = (Button) findViewById(R.id.button_post_cm);
         btn_cancel = (ImageButton) findViewById(R.id.button_cancel_cm);
-        title = (EditText) findViewById(R.id.cmTitle);
+        title = (TextView) findViewById(R.id.cmTitle);
         content = (EditText) findViewById(R.id.inputCm);
 
         btn_cancel.setOnClickListener(new View.OnClickListener() {
@@ -120,6 +122,7 @@ public class NewCommentActivity extends AppCompatActivity {
                             cm.add(new Comment(user, map.get("cContent").toString(), time.toDate(), (int) (long) map.get("cVote")));
                         }
                         Date newTime = new Date();
+                        user = SignedInActivity.getCurrentuser();
                         Comment add = new Comment(user, content.getText().toString(), newTime, 0 );
                         cm.add(add);
                         addDocument(cm,ref);
