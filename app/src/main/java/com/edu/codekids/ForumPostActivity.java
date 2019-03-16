@@ -42,9 +42,11 @@ public class ForumPostActivity extends AppCompatActivity
 {
 
     private static final String TAG = "Message: ";
-    public static Post post;
+    private Post post;
+    private String lang = null;
     private CommentRVAdapter adapter;
     private SwipeRefreshLayout mySwipeRefreshLayout;
+    private FirebaseFirestore db;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -118,7 +120,7 @@ public class ForumPostActivity extends AppCompatActivity
                 return Integer.compare(obj2.getcVote(), obj1.getcVote());
             }
         });
-        adapter = new CommentRVAdapter(cm);
+        adapter = new CommentRVAdapter(cm,lang,post.getpId());
         rv.setAdapter(adapter);
     }
 
@@ -129,11 +131,10 @@ public class ForumPostActivity extends AppCompatActivity
     }
 
     private void refresh(){
-        FirebaseFirestore db = FirebaseFirestore.getInstance();
-        String lang = null;
+        db = FirebaseFirestore.getInstance();
         if (post.getpLang().equals("Java")) lang = "javaPost";
         else if(post.getpLang().equals("Pascal")) lang = "pascalPost";
-        DocumentReference docRef = db.collection(lang).document(post.getpId());
+        final DocumentReference docRef = db.collection(lang).document(post.getpId());
 
         docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
             @Override
@@ -159,7 +160,7 @@ public class ForumPostActivity extends AppCompatActivity
                             return Integer.compare(obj2.getcVote(), obj1.getcVote());
                         }
                     });
-                    adapter = new CommentRVAdapter(cm);
+                    adapter = new CommentRVAdapter(cm,lang,post.getpId());
                     rv.setAdapter(adapter);
                     mySwipeRefreshLayout.setRefreshing(false);
                 } else {
@@ -168,19 +169,6 @@ public class ForumPostActivity extends AppCompatActivity
             }
         });
 
-        List<Comment> comments = adapter.getComments();
-        docRef.update("pComments", comments).addOnSuccessListener(new OnSuccessListener<Void>() {
-            @Override
-            public void onSuccess(Void aVoid) {
-                Log.d(TAG, "DocumentSnapshot successfully updated!");
-            }
-        })
-                .addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception e) {
-                        Log.w(TAG, "Error updating document", e);
-                    }
-                });
     }
 
     @Override
@@ -195,29 +183,4 @@ public class ForumPostActivity extends AppCompatActivity
         refresh();
     }
 
-    /*
-    @Override
-    public void onDestroy(){
-        super.onDestroy();
-        //Update final vote number of all comments
-        List<Comment> comments = adapter.getComments();
-        FirebaseFirestore db = FirebaseFirestore.getInstance();
-        String lang = null;
-        if(post.getpLang().equals("Java")) lang = "javaPost";
-        else if (post.getpLang().equals("Pascal")) lang = "pascalPost";
-        db.collection(lang).document(post.getpId())
-                .update("pComments", comments).addOnSuccessListener(new OnSuccessListener<Void>() {
-            @Override
-            public void onSuccess(Void aVoid) {
-                Log.d(TAG, "DocumentSnapshot successfully updated!");
-            }
-        })
-                .addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception e) {
-                        Log.w(TAG, "Error updating document", e);
-                    }
-                });
-    }
-    */
 }

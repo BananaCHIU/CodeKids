@@ -1,20 +1,29 @@
 package com.edu.codekids;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.TextView;
+
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.firestore.FirebaseFirestore;
+
 import org.ocpsoft.prettytime.PrettyTime;
 
 import java.util.List;
 import java.util.Locale;
 
+import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 public class CommentRVAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
 {
+    private static final String TAG = "Message: ";
+
     public static class CommentViewHolder extends RecyclerView.ViewHolder
     {
         public final CardView cv;
@@ -42,11 +51,14 @@ public class CommentRVAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
         }
     }
 
-    List<Comment> comments;
+    private List<Comment> comments;
+    private String type, id;
 
-    public CommentRVAdapter(List<Comment> comments)
+    public CommentRVAdapter(List<Comment> comments, String type, String id)
     {
         this.comments = comments;
+        this.type = type;
+        this.id = id;
     }
 
     @Override
@@ -95,12 +107,15 @@ public class CommentRVAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
         if((likealpha == (float) 0.4) && (dislikealpha == (float) 1)){                //Disliked
             likebtn.setAlpha((float) 1); dislikebtn.setAlpha((float) 0.4);
             comments.get(i).setcVote(comments.get(i).getcVote() + 2);                 //double add
+            updateComment(comments);
         } else if ((dislikealpha == (float) 0.4) && (likealpha == (float) 1)){        //Liked
             likebtn.setAlpha((float) 0.4);
             comments.get(i).setcVote(comments.get(i).getcVote() - 1);                 //reset
+            updateComment(comments);
         } else if ((dislikealpha == (float) 0.4) && (likealpha == (float) 0.4)){      //No Select
             likebtn.setAlpha((float) 1);
             comments.get(i).setcVote(comments.get(i).getcVote() + 1);                 //add
+            updateComment(comments);
         }
     }
 
@@ -110,18 +125,38 @@ public class CommentRVAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
         if((likealpha == (float) 0.4) && (dislikealpha == (float) 1)){                //Disliked
             dislikebtn.setAlpha((float) 0.4);
             comments.get(i).setcVote(comments.get(i).getcVote() + 1);                 //reset
+            updateComment(comments);
         } else if ((dislikealpha == (float) 0.4) && (likealpha == (float) 1)){        //Liked
             likebtn.setAlpha((float) 0.4); dislikebtn.setAlpha((float) 1);
             comments.get(i).setcVote(comments.get(i).getcVote() - 2);                 //double minus
+            updateComment(comments);
         } else if ((dislikealpha == (float) 0.4) && (likealpha == (float) 0.4)){      //No Select
             dislikebtn.setAlpha((float) 1);
             comments.get(i).setcVote(comments.get(i).getcVote() - 1);                 //minus
+            updateComment(comments);
         }
     }
 
     public List<Comment> getComments(){
         return comments;
     }
+
+    private void updateComment(List<Comment> comments){
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
+        db.collection(type).document(id)
+                .update("pComments", comments).addOnSuccessListener(new OnSuccessListener<Void>() {
+            @Override
+            public void onSuccess(Void aVoid) {
+                Log.d(TAG, "DocumentSnapshot successfully updated!");
+            }
+        })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Log.w(TAG, "Error updating document", e);
+                    }
+                });
+}
 
     @Override
     public void onAttachedToRecyclerView(RecyclerView recyclerView)
