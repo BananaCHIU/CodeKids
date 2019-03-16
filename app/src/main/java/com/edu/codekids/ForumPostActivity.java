@@ -130,6 +130,10 @@ public class ForumPostActivity extends AppCompatActivity
         startActivity(intent);
     }
 
+    public void refreshBtnClicked(View v){
+        refresh();
+    }
+
     private void refresh(){
         db = FirebaseFirestore.getInstance();
         if (post.getpLang().equals("Java")) lang = "javaPost";
