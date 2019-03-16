@@ -73,6 +73,7 @@ public class PascalForumFragment extends Fragment {
                                 Toast.makeText(getActivity(), "No post in the Pascal forum",
                                         Toast.LENGTH_LONG).show();
                             }
+                            mySwipeRefreshLayout.setRefreshing(false);
                         } else {
                             Log.d(TAG, "Error getting documents: ", task.getException());
                         }
@@ -118,7 +119,7 @@ public class PascalForumFragment extends Fragment {
                         // This method performs the actual data-refresh operation.
                         // The method calls setRefreshing(false) when it's finished.
                         refresh();
-                        mySwipeRefreshLayout.setRefreshing(false);
+
                     }
                 }
         );
