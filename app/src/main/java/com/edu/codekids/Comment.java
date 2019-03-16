@@ -3,7 +3,7 @@ package com.edu.codekids;
 import java.io.Serializable;
 import java.util.Date;
 
-public class Comment implements Serializable {
+public class Comment implements Serializable, Comparable<Comment>{
     private User cUser;
     private String cContent;
     private Date cTime;
@@ -31,5 +31,10 @@ public class Comment implements Serializable {
     public int getcVote() { return cVote; }
 
     public void setcVote(int newVote) { cVote = newVote; }
+
+    @Override
+    public int compareTo(Comment cm) {
+        return getcTime().compareTo(cm.getcTime());
+    }
 
 }

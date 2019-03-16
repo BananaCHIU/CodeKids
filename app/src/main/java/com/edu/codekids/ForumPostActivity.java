@@ -19,6 +19,8 @@ import android.widget.TextView;
 import org.ocpsoft.prettytime.PrettyTime;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Locale;
 
@@ -75,7 +77,9 @@ public class ForumPostActivity extends AppCompatActivity
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
         rv.setLayoutManager(linearLayoutManager);
         rv.setNestedScrollingEnabled(false);
-        CommentRVAdapter adapter = new CommentRVAdapter(post.getpComments());
+        List<Comment> cm = post.getpComments();
+        Collections.sort(cm, Collections.reverseOrder());
+        CommentRVAdapter adapter = new CommentRVAdapter(cm);
         rv.setAdapter(adapter);
 
     }
