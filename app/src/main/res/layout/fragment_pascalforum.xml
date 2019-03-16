@@ -38,13 +38,16 @@
                 android:id="@+id/pasforum_PostDate"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="24dp"
+                android:layout_marginStart="16dp"
                 android:layout_marginTop="8dp"
+                android:layout_marginEnd="8dp"
                 android:fontFamily="casual"
                 android:text="POSTDATE"
                 android:textAlignment="center"
                 android:textColor="@android:color/holo_green_light"
-                app:layout_constraintStart_toEndOf="@+id/pasforum_PostUser"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="1.0"
+                app:layout_constraintStart_toEndOf="@+id/pasforum_PostType"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
@@ -63,6 +66,20 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/pasforum_PostUser" />
+
+            <TextView
+                android:id="@+id/pasforum_PostType"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:fontFamily="casual"
+                android:text="POSTTYPE"
+                android:textAlignment="center"
+                android:textColor="@android:color/holo_purple"
+                android:textStyle="bold"
+                app:layout_constraintStart_toEndOf="@+id/pasforum_PostUser"
+                app:layout_constraintTop_toTopOf="parent" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

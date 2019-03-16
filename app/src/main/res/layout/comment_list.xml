@@ -11,7 +11,7 @@
         android:id="@+id/comment_CardView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="10dp"
+        android:layout_marginBottom="1dp"
         android:elevation="3dp"
         app:cardBackgroundColor="@color/colorSurface">
 
@@ -26,6 +26,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="8dp"
+                android:fontFamily="casual"
                 android:text="COMMENTNAME"
                 android:textAlignment="center"
                 android:textColor="@color/fui_bgFacebook"
@@ -37,12 +38,16 @@
                 android:id="@+id/comment_Date"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="24dp"
+                android:layout_marginStart="16dp"
                 android:layout_marginTop="8dp"
+                android:layout_marginEnd="8dp"
+                android:fontFamily="casual"
                 android:text="COMMENTDATE"
                 android:textAlignment="center"
                 android:textColor="@color/fui_bgEmail"
-                app:layout_constraintStart_toEndOf="@+id/comment_UserName"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="1.0"
+                app:layout_constraintStart_toEndOf="@+id/comment_Type"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
@@ -50,7 +55,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
-                android:layout_marginTop="8dp"
+                android:layout_marginTop="12dp"
                 android:layout_marginEnd="8dp"
                 android:layout_marginBottom="8dp"
                 android:text="COMMENTCONTENT"
@@ -100,6 +105,20 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/comment_LikeNum"
                 app:srcCompat="@drawable/baseline_keyboard_arrow_down_black_36" />
+
+            <TextView
+                android:id="@+id/comment_Type"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:fontFamily="casual"
+                android:text="COMMENTTYPE"
+                android:textAlignment="center"
+                android:textColor="@color/fui_bgAnonymous"
+                android:textStyle="bold"
+                app:layout_constraintStart_toEndOf="@+id/comment_UserName"
+                app:layout_constraintTop_toTopOf="parent" />
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>

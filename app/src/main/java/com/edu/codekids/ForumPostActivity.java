@@ -51,6 +51,7 @@ public class ForumPostActivity extends AppCompatActivity
 
         final CardView pCV;
         final TextView pUserName;
+        final TextView pUserType;
         final TextView pDate;
         final TextView pContent;
         final FloatingActionButton newComment;
@@ -58,11 +59,15 @@ public class ForumPostActivity extends AppCompatActivity
 
         pCV = (CardView)findViewById(R.id.post_CardView);
         pUserName = (TextView)findViewById(R.id.post_UserName);
+        pUserType = (TextView)findViewById(R.id.post_uType);
         pDate = (TextView)findViewById(R.id.post_Date);
         pContent = (TextView)findViewById(R.id.post_Content);
         newComment = (FloatingActionButton) findViewById(R.id.btn_new_comment);
 
         pUserName.setText(post.getUser().getuName());
+        String tempType = post.getUser().getuType();
+        String output = tempType.substring(0, 1).toUpperCase() + tempType.substring(1);
+        pUserType.setText(output);
         pDate.setText(prettyTime.format(post.getpTime()));
         pContent.setText(post.getpContent());
 

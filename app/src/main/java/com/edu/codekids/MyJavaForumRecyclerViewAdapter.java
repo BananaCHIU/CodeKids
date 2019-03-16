@@ -48,6 +48,9 @@ public class MyJavaForumRecyclerViewAdapter extends RecyclerView.Adapter<MyJavaF
         PrettyTime prettyTime = new PrettyTime(Locale.getDefault());
 
         holder.postUser.setText(posts.get(i).getUser().getuName());
+        String tempType = posts.get(i).getUser().getuType();
+        String output = tempType.substring(0, 1).toUpperCase() + tempType.substring(1);
+        holder.postuType.setText(output);
         holder.postDate.setText(prettyTime.format(posts.get(i).getpTime()));
         holder.postTitle.setText(posts.get(i).getpTitle());
 
@@ -72,6 +75,7 @@ public class MyJavaForumRecyclerViewAdapter extends RecyclerView.Adapter<MyJavaF
     {
         public final CardView cardView;
         public final TextView postUser;
+        public final TextView postuType;
         public final TextView postDate;
         public final TextView postTitle;
 
@@ -80,6 +84,7 @@ public class MyJavaForumRecyclerViewAdapter extends RecyclerView.Adapter<MyJavaF
             super(view);
             cardView = (CardView)itemView.findViewById(R.id.forum_CardView);
             postUser = (TextView)itemView.findViewById(R.id.forum_PostUser);
+            postuType = (TextView)itemView.findViewById(R.id.forum_PostType);
             postDate = (TextView)itemView.findViewById(R.id.forum_PostDate);
             postTitle = (TextView)itemView.findViewById(R.id.forum_PostTitle);
         }

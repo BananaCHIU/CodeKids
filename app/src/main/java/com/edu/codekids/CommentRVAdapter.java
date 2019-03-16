@@ -19,6 +19,7 @@ public class CommentRVAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
     {
         public final CardView cv;
         public final TextView userName;
+        public final TextView userType;
         public final TextView date;
         public final TextView c_content;
         public final TextView numlike;
@@ -31,6 +32,7 @@ public class CommentRVAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
             super(view);
             cv = (CardView)itemView.findViewById(R.id.comment_CardView);
             userName = (TextView)itemView.findViewById(R.id.comment_UserName);
+            userType = (TextView)itemView.findViewById(R.id.comment_Type);
             date = (TextView)itemView.findViewById(R.id.comment_Date);
             c_content = (TextView)itemView.findViewById(R.id.comment_Content);
             numlike = (TextView)itemView.findViewById(R.id.comment_LikeNum);
@@ -65,6 +67,9 @@ public class CommentRVAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
 
         final CommentViewHolder commentViewHolder = (CommentViewHolder) VH;
         commentViewHolder.userName.setText(comments.get(i).getcUser().getuName());
+        String tempType = comments.get(i).getcUser().getuType();
+        String output = tempType.substring(0, 1).toUpperCase() + tempType.substring(1);
+        commentViewHolder.userType.setText(output);
         commentViewHolder.date.setText(prettyTime.format(comments.get(i).getcTime()));
         commentViewHolder.c_content.setText(comments.get(i).getcContent());
         commentViewHolder.numlike.setText(Integer.toString(comments.get(i).getcVote()));

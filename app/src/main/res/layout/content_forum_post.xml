@@ -42,7 +42,7 @@
                 android:id="@+id/post_CardView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="16dp"
+                android:layout_marginBottom="32dp"
                 android:elevation="3dp">
 
                 <androidx.constraintlayout.widget.ConstraintLayout
@@ -55,9 +55,10 @@
                         android:layout_height="wrap_content"
                         android:layout_marginStart="8dp"
                         android:layout_marginTop="8dp"
+                        android:fontFamily="casual"
                         android:text="POST_USER"
                         android:textAlignment="center"
-                        android:textColor="@color/fui_bgFacebook"
+                        android:textColor="@android:color/holo_orange_dark"
                         android:textColorLink="@color/colorSecondary"
                         android:textStyle="bold"
                         app:layout_constraintStart_toStartOf="parent"
@@ -67,12 +68,16 @@
                         android:id="@+id/post_Date"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="8dp"
+                        android:layout_marginStart="16dp"
                         android:layout_marginTop="8dp"
+                        android:layout_marginEnd="8dp"
+                        android:fontFamily="casual"
                         android:text="POST_DATE"
                         android:textAlignment="center"
-                        android:textColor="@color/fui_bgEmail"
-                        app:layout_constraintStart_toEndOf="@+id/post_UserName"
+                        android:textColor="@android:color/holo_green_light"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintHorizontal_bias="1.0"
+                        app:layout_constraintStart_toEndOf="@+id/post_uType"
                         app:layout_constraintTop_toTopOf="parent" />
 
                     <TextView
@@ -89,6 +94,20 @@
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@+id/post_Date" />
+
+                    <TextView
+                        android:id="@+id/post_uType"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="8dp"
+                        android:layout_marginTop="8dp"
+                        android:fontFamily="casual"
+                        android:text="POST_TYPE"
+                        android:textAlignment="center"
+                        android:textColor="@android:color/holo_purple"
+                        android:textStyle="bold"
+                        app:layout_constraintStart_toEndOf="@+id/post_UserName"
+                        app:layout_constraintTop_toTopOf="parent" />
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
 

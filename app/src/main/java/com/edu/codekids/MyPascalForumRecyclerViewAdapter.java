@@ -39,6 +39,9 @@ public class MyPascalForumRecyclerViewAdapter extends RecyclerView.Adapter<MyPas
         PrettyTime prettyTime = new PrettyTime(Locale.getDefault());
 
         holder.postUser.setText(posts.get(i).getUser().getuName());
+        String tempType = posts.get(i).getUser().getuType();
+        String output = tempType.substring(0, 1).toUpperCase() + tempType.substring(1);
+        holder.postuType.setText(output);
         holder.postDate.setText(prettyTime.format(posts.get(i).getpTime()));
         holder.postTitle.setText(posts.get(i).getpTitle());
 
@@ -62,6 +65,7 @@ public class MyPascalForumRecyclerViewAdapter extends RecyclerView.Adapter<MyPas
     public static class PostViewHolder extends RecyclerView.ViewHolder {
         public final CardView cardView;
         public final TextView postUser;
+        public final TextView postuType;
         public final TextView postDate;
         public final TextView postTitle;
 
@@ -70,6 +74,7 @@ public class MyPascalForumRecyclerViewAdapter extends RecyclerView.Adapter<MyPas
             super(view);
             cardView = (CardView)itemView.findViewById(R.id.pasforum_CardView);
             postUser = (TextView)itemView.findViewById(R.id.pasforum_PostUser);
+            postuType = (TextView)itemView.findViewById(R.id.pasforum_PostType);
             postDate = (TextView)itemView.findViewById(R.id.pasforum_PostDate);
             postTitle = (TextView)itemView.findViewById(R.id.pasforum_PostTitle);
         }
