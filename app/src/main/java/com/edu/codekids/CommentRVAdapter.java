@@ -119,6 +119,9 @@ public class CommentRVAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
         }
     }
 
+    public List<Comment> getComments(){
+        return comments;
+    }
 
     @Override
     public void onAttachedToRecyclerView(RecyclerView recyclerView)

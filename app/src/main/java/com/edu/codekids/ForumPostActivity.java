@@ -3,9 +3,13 @@ package com.edu.codekids;
 import android.content.Intent;
 import android.os.Bundle;
 
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
+import com.google.firebase.firestore.FirebaseFirestore;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.cardview.widget.CardView;
@@ -13,8 +17,10 @@ import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import org.ocpsoft.prettytime.PrettyTime;
 
@@ -27,7 +33,9 @@ import java.util.Locale;
 public class ForumPostActivity extends AppCompatActivity
 {
 
+    private static final String TAG = "Message: ";
     public static Post post;
+    private CommentRVAdapter adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -79,7 +87,7 @@ public class ForumPostActivity extends AppCompatActivity
         rv.setNestedScrollingEnabled(false);
         List<Comment> cm = post.getpComments();
         Collections.sort(cm, Collections.reverseOrder());
-        CommentRVAdapter adapter = new CommentRVAdapter(cm);
+        adapter = new CommentRVAdapter(cm);
         rv.setAdapter(adapter);
 
     }
@@ -91,9 +99,38 @@ public class ForumPostActivity extends AppCompatActivity
     }
 
     @Override
+    public void onBackPressed(){
+        finish();
+    }
+
+    @Override
     public void onResume() {
         super.onResume();
         //Need to refresh after posting new comment
 
+    }
+
+    @Override
+    public void onDestroy(){
+        super.onDestroy();
+        //Update final vote number of all comments
+        List<Comment> comments = adapter.getComments();
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
+        String lang = null;
+        if(post.getpLang().equals("Java")) lang = "javaPost";
+        else if (post.getpLang().equals("Pascal")) lang = "pascalPost";
+        db.collection(lang).document(post.getpId())
+                .update("pComments", comments).addOnSuccessListener(new OnSuccessListener<Void>() {
+            @Override
+            public void onSuccess(Void aVoid) {
+                Log.d(TAG, "DocumentSnapshot successfully updated!");
+            }
+        })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Log.w(TAG, "Error updating document", e);
+                    }
+                });
     }
 }
