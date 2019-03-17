@@ -1,5 +1,6 @@
 package com.edu.codekids;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
@@ -9,13 +10,21 @@ import android.util.Log;
 import com.firebase.ui.auth.AuthUI;
 import com.firebase.ui.auth.ErrorCodes;
 import com.firebase.ui.auth.IdpResponse;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.Arrays;
 
 public class AuthActivity extends AppCompatActivity {
 
     private static final int RC_SIGN_IN = 123;
-    private static final String ErrorTAG = "Error";
+    private static final String TAG = "Error";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,8 +51,33 @@ public class AuthActivity extends AppCompatActivity {
 
             // Successfully signed in
             if (resultCode == RESULT_OK) {
-                startActivity(SignedInActivity.createIntent(this, response));
-                finish();
+                String uid;
+                FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+                uid = user.getUid();
+                FirebaseFirestore db = FirebaseFirestore.getInstance();
+                DocumentReference docRef = db.collection("users").document(uid);
+                docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+
+                        if (task.isSuccessful()) {
+                            DocumentSnapshot document = task.getResult();
+                            if (document.exists()) {
+                                Log.d(TAG, "DocumentSnapshot data: " + document.getData());
+                                startActivity(new Intent(AuthActivity.this,SignedInActivity.class));
+                                AuthActivity.this.finish();
+                            } else {
+                                Log.d(TAG, "No such document");
+                                startActivity(new Intent(AuthActivity.this,RegisterActivity.class));
+                                AuthActivity.this.finish();
+                            }
+                        } else {
+                            Log.d(TAG, "get failed with ", task.getException());
+                            startActivity(new Intent(AuthActivity.this,RegisterActivity.class));
+                            AuthActivity.this.finish();
+                        }
+                    }
+                });
             } else {
                 // Sign in failed
                 if (response == null) {
@@ -56,7 +90,7 @@ public class AuthActivity extends AppCompatActivity {
                     buildAuthUI();
                     return;
                 }
-                Log.e(ErrorTAG, "Sign-in error: ", response.getError());
+                Log.e(TAG, "Sign-in error: ", response.getError());
             }
         }
     }

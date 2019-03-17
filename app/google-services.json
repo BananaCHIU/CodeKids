@@ -23,6 +23,38 @@
           }
         },
         {
+          "client_id": "245981083548-bn7qtp4hpk1rcvtmtt727nd8a4oor24b.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.edu.codekids",
+            "certificate_hash": "7cf7cc1476b7b5e60d9d6503aec4c71f73fe6be3"
+          }
+        },
+        {
+          "client_id": "245981083548-0dfsjq8d7nqttoh8p1cm7usm1q2vj1bp.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.edu.codekids",
+            "certificate_hash": "9d52ae74d2834e9d519a34e811b021761d9c7b02"
+          }
+        },
+        {
+          "client_id": "245981083548-rp5a38dgdm0l4pa21f0cb6b3b8c9m5vl.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.edu.codekids",
+            "certificate_hash": "c212d65d9d89047ee7d8de9a1156127e4ed096af"
+          }
+        },
+        {
+          "client_id": "245981083548-5mdn10o0c045ngepk0298ojptib8lmq7.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.edu.codekids",
+            "certificate_hash": "56af43a99490229c06791dad64bf4daea34a1707"
+          }
+        },
+        {
           "client_id": "245981083548-p8m00bu54siio5t3p017vesg2p0v23ha.apps.googleusercontent.com",
           "client_type": 3
         }

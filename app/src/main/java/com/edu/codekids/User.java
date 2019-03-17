@@ -1,7 +1,10 @@
 package com.edu.codekids;
 
-public class User {
+import java.io.Serializable;
+
+public class User implements Serializable {
     private String uId, uName ,uType;
+
     public User(){ }
 
     public User(String uid, String name, String type){

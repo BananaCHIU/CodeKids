@@ -22,9 +22,12 @@ import android.widget.Toast;
 
 import com.firebase.ui.auth.AuthUI;
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.List;
 
@@ -204,6 +207,8 @@ public class SettingsActivity extends AppCompatPreferenceActivity{
      */
     @TargetApi(Build.VERSION_CODES.HONEYCOMB)
     public static class AccountPreferenceFragment extends PreferenceFragment {
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        String uid;
 
         @Override
         public void onCreate(Bundle savedInstanceState) {
@@ -217,7 +222,6 @@ public class SettingsActivity extends AppCompatPreferenceActivity{
                 public boolean onPreferenceClick(Preference preference) {
                     //code for what you want it to do
                     FirebaseAuth auth = FirebaseAuth.getInstance();
-                    FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
                     String emailAddress = user.getEmail();
                     auth.sendPasswordResetEmail(emailAddress)
                             .addOnCompleteListener(new OnCompleteListener<Void>() {
@@ -241,24 +245,41 @@ public class SettingsActivity extends AppCompatPreferenceActivity{
                 @Override
                 public boolean onPreferenceClick(Preference preference) {
                     //code for what you want it to do
-                    AuthUI.getInstance()
-                            .delete(getContext())
-                            .addOnCompleteListener(new OnCompleteListener<Void>() {
+                    uid = user.getUid();
+                    FirebaseFirestore db = FirebaseFirestore.getInstance();
+                    //Delete User Document in Cloud Firestore
+                    db.collection("users").document(uid)
+                            .delete()
+                            .addOnSuccessListener(new OnSuccessListener<Void>() {
                                 @Override
-                                public void onComplete(@NonNull Task<Void> task) {
-                                    if (task.isSuccessful()) {
-                                        // Deletion succeeded
-                                        Toast.makeText(getActivity(), "Deletion Succeeded",
-                                                Toast.LENGTH_LONG).show();
-                                        FirebaseAuth.getInstance().signOut();
-                                        Intent intent = new Intent(getContext(), AuthActivity.class);
-                                        startActivity(intent);
-                                        Log.d(TAG, "User account deleted.");
-                                    } else {
-                                        // Deletion failed
-                                        Toast.makeText(getActivity(), "Deletion Failed. Please Sign Out and Retry",
-                                                Toast.LENGTH_LONG).show();
-                                    }
+                                public void onSuccess(Void aVoid) {
+                                    Log.d(TAG, "DocumentSnapshot successfully deleted!");
+                                    //Delete User Account in Firebase Auth
+                                    AuthUI.getInstance()
+                                            .delete(getContext())
+                                            .addOnCompleteListener(new OnCompleteListener<Void>() {
+                                                @Override
+                                                public void onComplete(@NonNull Task<Void> task) {
+                                                    if (task.isSuccessful()) {
+                                                        // Deletion succeeded
+                                                        Toast.makeText(getActivity(), "Auth account Deletion Succeeded",
+                                                                Toast.LENGTH_LONG).show();
+                                                        Intent intent = new Intent(getContext(), AuthActivity.class);
+                                                        startActivity(intent);
+                                                        Log.d(TAG, "User account deleted.");
+                                                    } else {
+                                                        // Deletion failed
+                                                        Toast.makeText(getActivity(), "Deletion Failed. Please Sign Out and Retry",
+                                                                Toast.LENGTH_LONG).show();
+                                                    }
+                                                }
+                                            });
+                                }
+                            })
+                            .addOnFailureListener(new OnFailureListener() {
+                                @Override
+                                public void onFailure(@NonNull Exception e) {
+                                    Log.w(TAG, "Error deleting document", e);
                                 }
                             });
                     return true;

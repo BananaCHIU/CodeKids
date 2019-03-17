@@ -1,29 +1,23 @@
 package com.edu.codekids;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public class Comment extends Post {
-    private User CuId, CuName, CuType;
+public class Comment implements Serializable{
+    private User cUser;
     private String cContent;
     private Date cTime;
     private int cVote;
 
+
     public Comment(){}
 
-    public Comment(User uid, User name, User type, String content, Date time, int vote){
-        CuId=uid; CuName=name; CuType=type; cContent=content; cTime=time; cVote=vote;
+    public Comment(User user, String content, Date time, int vote){
+        cUser=user; cContent=content; cTime=time; cVote=vote;
     }
 
-    public User getCuId() {
-        return CuId;
-    }
-
-    public User getCuName() {
-        return CuName;
-    }
-
-    public User getCuType() {
-        return CuType;
+    public User getcUser() {
+        return cUser;
     }
 
     public String getcContent() {
@@ -34,8 +28,9 @@ public class Comment extends Post {
         return cTime;
     }
 
-    public int getcVote() {
-        return cVote;
-    }
+    public int getcVote() { return cVote; }
+
+    public void setcVote(int newVote) { cVote = newVote; }
+
 
 }
