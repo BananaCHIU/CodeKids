@@ -56,6 +56,7 @@ public class NewPostActivity extends AppCompatActivity {
     String currentPhotoPath;
     private Bitmap bitmap;
     private Uri photoURI;
+    EditText content;
     //private Bitmap imageBitmap;
 
     @Override
@@ -66,8 +67,8 @@ public class NewPostActivity extends AppCompatActivity {
         ImageButton cancel = (ImageButton) findViewById(R.id.button_cancel);
         Button postBtn = (Button) findViewById(R.id.button_post);
         final EditText title = (EditText) findViewById(R.id.inputTitle);
-        final EditText content = (EditText) findViewById(R.id.inputContent);
         ChipGroup chipGroup = (ChipGroup) findViewById(R.id.chip_group);
+        content = (EditText) findViewById(R.id.inputContent);
         chipGroup.setOnCheckedChangeListener(new ChipGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(ChipGroup chipGroup, int i) {
@@ -243,6 +244,7 @@ public class NewPostActivity extends AppCompatActivity {
                                 // Task completed successfully
 
                                 String resultText = firebaseVisionText.getText();
+                                content.append("\n"+resultText);
                                 for (FirebaseVisionText.TextBlock block: firebaseVisionText.getTextBlocks()) {
                                     String blockText = block.getText();
                                     Float blockConfidence = block.getConfidence();
