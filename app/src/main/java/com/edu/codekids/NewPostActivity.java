@@ -1,5 +1,6 @@
 package com.edu.codekids;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Matrix;
@@ -233,6 +234,11 @@ public class NewPostActivity extends AppCompatActivity {
     }
 
     private void textRecognition(Bitmap bitmap){
+        final ProgressDialog dialog=new ProgressDialog(this);
+        dialog.setMessage("Processing");
+        dialog.setCancelable(false);
+        dialog.setInverseBackgroundForced(false);
+        dialog.show();
         FirebaseVisionImage image = FirebaseVisionImage.fromBitmap(bitmap);
         FirebaseVisionTextRecognizer detector = FirebaseVision.getInstance()
                 .getOnDeviceTextRecognizer();
@@ -245,6 +251,7 @@ public class NewPostActivity extends AppCompatActivity {
 
                                 String resultText = firebaseVisionText.getText();
                                 content.append("\n"+resultText);
+                                dialog.dismiss();
                                 for (FirebaseVisionText.TextBlock block: firebaseVisionText.getTextBlocks()) {
                                     String blockText = block.getText();
                                     Float blockConfidence = block.getConfidence();
