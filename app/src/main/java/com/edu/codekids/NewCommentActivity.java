@@ -23,6 +23,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.sql.Time;
 import java.util.ArrayList;
@@ -69,7 +70,9 @@ public class NewCommentActivity extends AppCompatActivity {
     }
 
     public void postBtnClicked(){
-        uploadComment();
+        if (content.getText().toString().isEmpty()){
+            Toast.makeText(this, "Please Fill in Your Comment", Toast.LENGTH_LONG).show();
+        } else uploadComment();
     }
 
     public void cancelBtnClicked(){
