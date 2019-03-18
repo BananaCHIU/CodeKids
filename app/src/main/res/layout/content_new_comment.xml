@@ -8,6 +8,18 @@
     tools:context=".NewCommentActivity"
     tools:showIn="@layout/activity_new_comment">
 
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/btn_camera"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="16dp"
+        android:clickable="true"
+        android:onClick="btnCameraClicked"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:srcCompat="@drawable/baseline_camera_white_48" />
+
     <TextView
         android:id="@+id/cmTitle"
         android:layout_width="0dp"
