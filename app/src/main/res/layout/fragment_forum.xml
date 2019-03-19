@@ -33,5 +33,6 @@
         android:layout_gravity="bottom|end"
         android:layout_margin="@dimen/fab_margin"
         android:src="@drawable/baseline_add_white_48"
-        app:backgroundTint="@color/colorSecondary" />
+        app:backgroundTint="@color/colorSecondary"
+        app:rippleColor="@color/colorSecondaryVariant" />
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

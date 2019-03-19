@@ -77,6 +77,34 @@ public class SignedInActivity extends AppCompatActivity
                         if (document.exists()) {
                             currentuser = task.getResult().toObject(User.class);
                             Log.d(TAG, "DocumentSnapshot data: " + document.getData());
+
+
+                            Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+                            setSupportActionBar(toolbar);
+
+                            DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+                            ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
+                                    SignedInActivity.this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+                            drawer.addDrawerListener(toggle);
+                            toggle.syncState();
+
+                            NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+                            navigationView.setNavigationItemSelectedListener(SignedInActivity.this);
+                            TextView uName = (TextView) navigationView.getHeaderView(0).findViewById(R.id.userName);
+                            uName.setText(name);
+                            TextView uEmail = (TextView) navigationView.getHeaderView(0).findViewById(R.id.userEmail);
+                            uEmail.setText(email);
+                            ImageView uPhoto = (ImageView) navigationView.getHeaderView(0).findViewById(R.id.userImage);
+                            if (photoUrl != null) {
+                                Picasso.with(SignedInActivity.this).load(photoUrl.toString()).into(uPhoto);
+                            } else uPhoto.setImageResource(R.drawable.ic_person_white);
+
+                            FragmentManager fragmentManager = getSupportFragmentManager();
+                            FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                            HomeFragment fragment = new HomeFragment();
+                            fragmentTransaction.replace(R.id.signedIn, fragment);
+                            fragmentTransaction.commit();
+
                         } else {
                             Log.d(TAG, "No such document");
                         }
@@ -85,34 +113,34 @@ public class SignedInActivity extends AppCompatActivity
                     }
                 }
             });
+        } else {
 
+            Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+            setSupportActionBar(toolbar);
+
+            DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+            ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
+                    this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+            drawer.addDrawerListener(toggle);
+            toggle.syncState();
+
+            NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+            navigationView.setNavigationItemSelectedListener(this);
+            TextView uName = (TextView) navigationView.getHeaderView(0).findViewById(R.id.userName);
+            uName.setText(name);
+            TextView uEmail = (TextView) navigationView.getHeaderView(0).findViewById(R.id.userEmail);
+            uEmail.setText(email);
+            ImageView uPhoto = (ImageView) navigationView.getHeaderView(0).findViewById(R.id.userImage);
+            if (photoUrl != null) {
+                Picasso.with(this).load(photoUrl.toString()).into(uPhoto);
+            } else uPhoto.setImageResource(R.drawable.ic_person_white);
+
+            FragmentManager fragmentManager = getSupportFragmentManager();
+            FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+            HomeFragment fragment = new HomeFragment();
+            fragmentTransaction.replace(R.id.signedIn, fragment);
+            fragmentTransaction.commit();
         }
-
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
-
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
-                this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
-        drawer.addDrawerListener(toggle);
-        toggle.syncState();
-
-        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
-        navigationView.setNavigationItemSelectedListener(this);
-        TextView uName = (TextView) navigationView.getHeaderView(0).findViewById(R.id.userName);
-        uName.setText(name);
-        TextView uEmail = (TextView) navigationView.getHeaderView(0).findViewById(R.id.userEmail);
-        uEmail.setText(email);
-        ImageView uPhoto = (ImageView) navigationView.getHeaderView(0).findViewById(R.id.userImage);
-        if (photoUrl!=null){
-            Picasso.with(this).load(photoUrl.toString()).into(uPhoto);
-        } else uPhoto.setImageResource(R.drawable.ic_person_white);
-
-        FragmentManager fragmentManager = getSupportFragmentManager();
-        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-        HomeFragment fragment = new HomeFragment();
-        fragmentTransaction.replace(R.id.signedIn, fragment);
-        fragmentTransaction.commit();
     }
 
     @Override
@@ -145,6 +173,8 @@ public class SignedInActivity extends AppCompatActivity
             HomeFragment fragment = new HomeFragment();
             fragmentTransaction.replace(R.id.signedIn, fragment);
             fragmentTransaction.commit();
+        } else if (id == R.id.nav_learn){
+
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
