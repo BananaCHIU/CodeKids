@@ -39,6 +39,7 @@ public class AuthActivity extends AppCompatActivity {
                 AuthUI.getInstance().createSignInIntentBuilder().setAvailableProviders(Arrays.asList(
                         new AuthUI.IdpConfig.GoogleBuilder().build(),
                         new AuthUI.IdpConfig.EmailBuilder().build()))
+                        .setLogo(R.drawable.ic_launcher_round)
                         .build(),
                 RC_SIGN_IN);
     }
