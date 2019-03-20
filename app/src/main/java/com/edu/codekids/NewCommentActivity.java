@@ -32,11 +32,13 @@ import androidx.core.content.FileProvider;
 
 import android.os.Environment;
 import android.provider.MediaStore;
+import android.text.method.ScrollingMovementMethod;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.Scroller;
 import android.widget.TextView;
 import android.widget.Toast;
 

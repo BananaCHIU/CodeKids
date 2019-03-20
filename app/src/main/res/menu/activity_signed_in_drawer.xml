@@ -20,6 +20,10 @@
             android:id="@+id/nav_setting"
             android:icon="@drawable/ic_menu_manage"
             android:title="Setting" />
+        <item
+            android:id="@+id/nav_about"
+            android:icon="@drawable/baseline_info_black_48"
+            android:title="About Us" />
 
     </group>
 

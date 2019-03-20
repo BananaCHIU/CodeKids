@@ -55,6 +55,7 @@
         android:singleLine="false"
         android:textAlignment="textStart"
         android:verticalScrollbarPosition="right"
+        android:scrollbars="vertical"
         app:backgroundTint="@android:color/transparent"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
