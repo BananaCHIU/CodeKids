@@ -48,15 +48,15 @@ public class QuizDatabase extends SQLiteOpenHelper {
     }
 
     private void fillQuestionsTable() {
-        QuestionBank q1 = new QuestionBank("A is correct", "A", "B", "C", 1);
+        QuestionBank q1 = new QuestionBank("Which of the following is true?", "A class can contain many methods", "A class can contain only one method", "A class cannot contain any method", 1);
         addQuestion(q1);
-        QuestionBank q2 = new QuestionBank("B is correct", "A", "B", "C", 2);
+        QuestionBank q2 = new QuestionBank("Which of the following class name is valid is correct?", "myClass", "MyClass", "myclass", 2);
         addQuestion(q2);
-        QuestionBank q3 = new QuestionBank("C is correct", "A", "B", "C", 3);
+        QuestionBank q3 = new QuestionBank("Which of the following identifiers are illegal? is correct", "$dollar", "_myIdentifiers", "2two", 3);
         addQuestion(q3);
-        QuestionBank q4 = new QuestionBank("A is correct ", "A", "B", "C", 1);
+        QuestionBank q4 = new QuestionBank("How many types of variables in Java?", "3", "2", "1", 1);
         addQuestion(q4);
-        QuestionBank q5 = new QuestionBank("B is correct ", "A", "B", "C", 2);
+        QuestionBank q5 = new QuestionBank("What is methods?", "A method has states and behaviors", "A method is basically a behavior", "A method has its unique set of instance variables", 2);
         addQuestion(q5);
     }
 
