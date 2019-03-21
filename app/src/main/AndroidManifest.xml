@@ -68,7 +68,6 @@
         <activity android:name=".Tutorial1" />
         <activity android:name=".quiz_start_screenActivity" />
         <activity android:name=".QuizActivity" />
-
         <meta-data
             android:name="com.google.firebase.ml.vision.DEPENDENCIES"
             android:value="ocr" />

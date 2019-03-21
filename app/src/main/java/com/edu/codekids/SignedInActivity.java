@@ -103,7 +103,7 @@ public class SignedInActivity extends AppCompatActivity
                             FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
                             HomeFragment fragment = new HomeFragment();
                             fragmentTransaction.replace(R.id.signedIn, fragment);
-                            fragmentTransaction.commit();
+                            fragmentTransaction.commitAllowingStateLoss();
 
                         } else {
                             Log.d(TAG, "No such document");
@@ -176,6 +176,12 @@ public class SignedInActivity extends AppCompatActivity
         } else if (id == R.id.nav_learn){
             startActivity(new Intent(this, Tutorial1.class));
             finish();
+        } else if (id == R.id.nav_about){
+            FragmentManager fragmentManager = getSupportFragmentManager();
+            FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+            AboutUsFragment fragment = new AboutUsFragment();
+            fragmentTransaction.replace(R.id.signedIn, fragment);
+            fragmentTransaction.commit();
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
