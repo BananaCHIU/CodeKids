@@ -174,7 +174,11 @@ public class SignedInActivity extends AppCompatActivity
             fragmentTransaction.replace(R.id.signedIn, fragment);
             fragmentTransaction.commit();
         } else if (id == R.id.nav_learn){
-            startActivity(new Intent(this, GameMainActivity.class));
+            FragmentManager fragmentManager = getSupportFragmentManager();
+            FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+            LearnFragment learnFragment = new LearnFragment();
+            fragmentTransaction.replace(R.id.signedIn, learnFragment);
+            fragmentTransaction.commit();
         } else if (id == R.id.nav_about){
             FragmentManager fragmentManager = getSupportFragmentManager();
             FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
