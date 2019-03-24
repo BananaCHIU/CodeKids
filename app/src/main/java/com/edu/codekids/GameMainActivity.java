@@ -82,9 +82,9 @@ public class GameMainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_game_main);
 
         // Instantiate a ViewPager and a PagerAdapter.
-        ViewPager vp = findViewById(R.id.tPager);
+        mPager = findViewById(R.id.tPager);
         ScreenSlidePagerAdapter myAdapter = new ScreenSlidePagerAdapter(getSupportFragmentManager());
-        vp.setAdapter(myAdapter);
+        mPager.setAdapter(myAdapter);
     }
 
     private class ScreenSlidePagerAdapter extends FragmentPagerAdapter {
