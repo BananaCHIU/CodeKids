@@ -1,6 +1,8 @@
 package com.edu.codekids;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
 import android.os.Bundle;
 import android.view.View;
@@ -48,6 +50,12 @@ public class GameMainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game_main);
+
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        T1Fragment fragment = new T1Fragment();
+        fragmentTransaction.replace(R.id.gameMain, fragment);
+        fragmentTransaction.commit();
     }
 
 }
