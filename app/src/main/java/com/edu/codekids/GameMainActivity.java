@@ -1,8 +1,14 @@
 package com.edu.codekids;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentPagerAdapter;
+import androidx.fragment.app.FragmentStatePagerAdapter;
 import androidx.fragment.app.FragmentTransaction;
+import androidx.viewpager.widget.PagerAdapter;
+import androidx.viewpager.widget.ViewPager;
 
 import android.os.Bundle;
 import android.view.View;
@@ -10,6 +16,30 @@ import android.view.Window;
 import android.view.WindowManager;
 
 public class GameMainActivity extends AppCompatActivity {
+
+    private static final int NUM_PAGES = 2;
+    /**
+     * The pager widget, which handles animation and allows swiping horizontally to access previous
+     * and next wizard steps.
+     */
+    private ViewPager mPager;
+
+    /**
+     * The pager adapter, which provides the pages to the view pager widget.
+     */
+    private PagerAdapter pagerAdapter;
+
+    @Override
+    public void onBackPressed() {
+        if (mPager.getCurrentItem() == 0) {
+            // If the user is currently looking at the first step, allow the system to handle the
+            // Back button. This calls finish() on this activity and pops the back stack.
+            super.onBackPressed();
+        } else {
+            // Otherwise, select the previous step.
+            mPager.setCurrentItem(mPager.getCurrentItem() - 1);
+        }
+    }
 
     @Override
     public void onWindowFocusChanged(boolean hasFocus) {
@@ -51,11 +81,33 @@ public class GameMainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game_main);
 
-        FragmentManager fragmentManager = getSupportFragmentManager();
-        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-        T1Fragment fragment = new T1Fragment();
-        fragmentTransaction.replace(R.id.gameMain, fragment);
-        fragmentTransaction.commit();
+        // Instantiate a ViewPager and a PagerAdapter.
+        ViewPager vp = findViewById(R.id.tPager);
+        ScreenSlidePagerAdapter myAdapter = new ScreenSlidePagerAdapter(getSupportFragmentManager());
+        vp.setAdapter(myAdapter);
     }
 
+    private class ScreenSlidePagerAdapter extends FragmentPagerAdapter {
+
+        public ScreenSlidePagerAdapter(@NonNull FragmentManager fm) {
+            super(fm);
+        }
+
+        @Override
+        public Fragment getItem(int position) {
+            switch (position) {
+                case 0:
+                    return new T1Fragment();
+                case 1:
+                    return new T2Fragment();
+            }
+            return null;
+        }
+            @Override
+            public int getCount () {
+                return NUM_PAGES;
+            }
+
+
+    }
 }
