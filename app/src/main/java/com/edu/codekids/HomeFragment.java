@@ -10,7 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.edu.codekids.R;
+import com.edu.codekids.Objects.User;
 
 /**
  * A simple {@link Fragment} subclass.

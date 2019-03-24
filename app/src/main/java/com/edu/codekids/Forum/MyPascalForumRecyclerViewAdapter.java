@@ -1,4 +1,4 @@
-package com.edu.codekids;
+package com.edu.codekids.Forum;
 
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
@@ -9,7 +9,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.edu.codekids.PascalForumFragment.OnPascalFragmentInteractionListener;
+import com.edu.codekids.Objects.Post;
+import com.edu.codekids.R;
 
 import org.ocpsoft.prettytime.PrettyTime;
 

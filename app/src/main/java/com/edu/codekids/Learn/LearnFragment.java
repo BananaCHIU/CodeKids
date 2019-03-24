@@ -1,34 +1,28 @@
-package com.edu.codekids;
+package com.edu.codekids.Learn;
 
 
-import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
-import androidx.fragment.app.FragmentStatePagerAdapter;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-import androidx.viewpager.widget.PagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.edu.codekids.R;
 import com.google.android.material.tabs.TabLayout;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class ForumFragment extends Fragment {
-
+public class LearnFragment extends Fragment {
     private TabLayout tabLayout;
     private ViewPager viewPager;
 
-    public ForumFragment() {
+    public LearnFragment() {
         // Required empty public constructor
     }
 
@@ -38,32 +32,22 @@ public class ForumFragment extends Fragment {
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.fragment_forum, container, false);
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        View view = inflater.inflate(R.layout.fragment_learn, container, false);
 
-        viewPager = (ViewPager) view.findViewById(R.id.viewpager);
+        viewPager = (ViewPager) view.findViewById(R.id.learn_viewpager);
         setupViewPager(viewPager);
 
-        tabLayout = (TabLayout) view.findViewById(R.id.tabs);
+        tabLayout = (TabLayout) view.findViewById(R.id.learn_tabs);
         tabLayout.setupWithViewPager(viewPager);
 
-        FloatingActionButton fab = (FloatingActionButton) view.findViewById(R.id.fab_new_post);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent in = new Intent(getActivity(), NewPostActivity.class);
-                startActivity(in);
-            }
-        });
         return view;
     }
 
     private void setupViewPager(ViewPager viewPager) {
-        ForumFragment.ViewPagerAdapter adapter = new ForumFragment.ViewPagerAdapter(getChildFragmentManager());
-        adapter.addFragment(new JavaForumFragment(), "Java");
-        adapter.addFragment(new PascalForumFragment(), "Pascal");
+        LearnFragment.ViewPagerAdapter adapter = new LearnFragment.ViewPagerAdapter(getChildFragmentManager());
+        adapter.addFragment(new JavaLearnFragment(), "Java");
+        adapter.addFragment(new PascalLearnFragment(), "Pascal");
         viewPager.setAdapter(adapter);
     }
 

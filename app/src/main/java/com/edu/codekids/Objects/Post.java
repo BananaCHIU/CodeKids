@@ -1,4 +1,4 @@
-package com.edu.codekids;
+package com.edu.codekids.Objects;
 
 import java.io.Serializable;
 import java.util.Date;

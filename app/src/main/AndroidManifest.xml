@@ -15,18 +15,18 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".GameMainActivity"></activity>
+        <activity android:name=".Learn.GameMainActivity"></activity>
         <activity
-            android:name=".NewCommentActivity"
+            android:name=".Forum.NewCommentActivity"
             android:label="@string/title_activity_new_comment"
-            android:parentActivityName=".ForumPostActivity"
+            android:parentActivityName=".Forum.ForumPostActivity"
             android:theme="@style/AppTheme.NoActionBar">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.edu.codekids.ForumPostActivity" />
+                android:value="com.edu.codekids.Forum.ForumPostActivity" />
         </activity>
         <activity
-            android:name=".NewPostActivity"
+            android:name=".Forum.NewPostActivity"
             android:label="@string/title_activity_new_post"
             android:parentActivityName=".SignedInActivity"
             android:theme="@style/AppTheme.NoActionBar">
@@ -35,7 +35,7 @@
                 android:value="com.edu.codekids.SignedInActivity" />
         </activity>
         <activity
-            android:name=".ForumPostActivity"
+            android:name=".Forum.ForumPostActivity"
             android:label="@string/title_activity_forum_post"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".RegisterActivity" />

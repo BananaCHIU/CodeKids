@@ -1,8 +1,7 @@
-package com.edu.codekids;
+package com.edu.codekids.Forum;
 
 
-import android.content.Context;
-import android.net.Uri;
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -14,16 +13,19 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.edu.codekids.R;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.tabs.TabLayout;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class LearnFragment extends Fragment {
+public class ForumFragment extends Fragment {
+
     private TabLayout tabLayout;
     private ViewPager viewPager;
 
-    public LearnFragment() {
+    public ForumFragment() {
         // Required empty public constructor
     }
 
@@ -33,22 +35,32 @@ public class LearnFragment extends Fragment {
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_learn, container, false);
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+        // Inflate the layout for this fragment
+        View view = inflater.inflate(R.layout.fragment_forum, container, false);
 
-        viewPager = (ViewPager) view.findViewById(R.id.learn_viewpager);
+        viewPager = (ViewPager) view.findViewById(R.id.viewpager);
         setupViewPager(viewPager);
 
-        tabLayout = (TabLayout) view.findViewById(R.id.learn_tabs);
+        tabLayout = (TabLayout) view.findViewById(R.id.tabs);
         tabLayout.setupWithViewPager(viewPager);
 
+        FloatingActionButton fab = (FloatingActionButton) view.findViewById(R.id.fab_new_post);
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent in = new Intent(getActivity(), NewPostActivity.class);
+                startActivity(in);
+            }
+        });
         return view;
     }
 
     private void setupViewPager(ViewPager viewPager) {
-        LearnFragment.ViewPagerAdapter adapter = new LearnFragment.ViewPagerAdapter(getChildFragmentManager());
-        adapter.addFragment(new JavaLearnFragment(), "Java");
-        adapter.addFragment(new PascalLearnFragment(), "Pascal");
+        ForumFragment.ViewPagerAdapter adapter = new ForumFragment.ViewPagerAdapter(getChildFragmentManager());
+        adapter.addFragment(new JavaForumFragment(), "Java");
+        adapter.addFragment(new PascalForumFragment(), "Pascal");
         viewPager.setAdapter(adapter);
     }
 

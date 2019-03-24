@@ -1,4 +1,4 @@
-package com.edu.codekids;
+package com.edu.codekids.Forum;
 
 import android.content.Context;
 import android.os.Bundle;
@@ -8,6 +8,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
+import com.edu.codekids.Objects.Post;
+import com.edu.codekids.Objects.User;
+import com.edu.codekids.R;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.CollectionReference;
@@ -29,28 +32,29 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 /**
  * A fragment representing a list of Items.
  * <p/>
- * Activities containing this fragment MUST implement the {@link OnJavaFragmentInteractionListener}
+ * Activities containing this fragment MUST implement the {@link OnPascalFragmentInteractionListener}
  * interface.
  */
-public class JavaForumFragment extends Fragment {
+public class PascalForumFragment extends Fragment {
 
     private static final String ARG_COLUMN_COUNT = "column-count";
     private static final String TAG = "Message: ";
     private int mColumnCount = 1;
     private SwipeRefreshLayout mySwipeRefreshLayout;
-    private OnJavaFragmentInteractionListener mListener;
     private List<Post> posts = new ArrayList<Post>();
+    private OnPascalFragmentInteractionListener mListener;
     private View view;
+
     /**
      * Mandatory empty constructor for the fragment manager to instantiate the
      * fragment (e.g. upon screen orientation changes).
      */
-    public JavaForumFragment() {
+    public PascalForumFragment() {
     }
 
     private void refresh(){
         FirebaseFirestore db = FirebaseFirestore.getInstance();
-        CollectionReference colRef = db.collection("javaPost");
+        CollectionReference colRef = db.collection("pascalPost");
         colRef.orderBy("pTime", Query.Direction.DESCENDING).get()
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                     @Override
@@ -66,11 +70,11 @@ public class JavaForumFragment extends Fragment {
                                 posts.add(post);
 
                             }
-                            RecyclerView recyclerView = (RecyclerView) view.findViewById(R.id.forum_RecyclerView);
+                            RecyclerView recyclerView = (RecyclerView) view.findViewById(R.id.pasforum_RecyclerView);
                             recyclerView.setLayoutManager(new LinearLayoutManager(view.getContext()));
-                            recyclerView.setAdapter(new MyJavaForumRecyclerViewAdapter(posts));
+                            recyclerView.setAdapter(new MyPascalForumRecyclerViewAdapter(posts));
                             if (posts.size() == 0){
-                                Toast.makeText(getActivity(), "No post in the Java forum",
+                                Toast.makeText(getActivity(), "No post in the Pascal forum",
                                         Toast.LENGTH_LONG).show();
                             }
                             mySwipeRefreshLayout.setRefreshing(false);
@@ -81,9 +85,8 @@ public class JavaForumFragment extends Fragment {
                 });
     }
 
-    @SuppressWarnings("unused")
-    public static JavaForumFragment newInstance(int columnCount) {
-        JavaForumFragment fragment = new JavaForumFragment();
+    public static PascalForumFragment newInstance(int columnCount) {
+        PascalForumFragment fragment = new PascalForumFragment();
         Bundle args = new Bundle();
         args.putInt(ARG_COLUMN_COUNT, columnCount);
         fragment.setArguments(args);
@@ -93,18 +96,20 @@ public class JavaForumFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         if (getArguments() != null) {
             mColumnCount = getArguments().getInt(ARG_COLUMN_COUNT);
         }
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
-    {
-        view = inflater.inflate(R.layout.fragment_javaforum_list, container, false);
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+        view = inflater.inflate(R.layout.fragment_pascalforum_list, container, false);
 
+        // Set the adapter
         refresh();
-        mySwipeRefreshLayout = (SwipeRefreshLayout) view.findViewById(R.id.swipe_container);
+        mySwipeRefreshLayout = (SwipeRefreshLayout) view.findViewById(R.id.pas_swipe_container);
         mySwipeRefreshLayout.setColorSchemeResources(R.color.colorPrimary,
                 android.R.color.holo_green_dark,
                 android.R.color.holo_orange_dark,
@@ -122,7 +127,6 @@ public class JavaForumFragment extends Fragment {
                     }
                 }
         );
-
         return view;
     }
 
@@ -131,11 +135,11 @@ public class JavaForumFragment extends Fragment {
     public void onAttach(Context context) {
         super.onAttach(context);
         refresh();
-        if (context instanceof OnJavaFragmentInteractionListener) {
-            mListener = (OnJavaFragmentInteractionListener) context;
+        if (context instanceof OnPascalFragmentInteractionListener) {
+            mListener = (OnPascalFragmentInteractionListener) context;
         } else {
             throw new RuntimeException(context.toString()
-                    + " must implement OnJavaFragmentInteractionListener");
+                    + " must implement OnPascalFragmentInteractionListener");
         }
     }
 
@@ -155,7 +159,7 @@ public class JavaForumFragment extends Fragment {
      * "http://developer.android.com/training/basics/fragments/communicating.html"
      * >Communicating with Other Fragments</a> for more information.
      */
-    public interface OnJavaFragmentInteractionListener {
+    public interface OnPascalFragmentInteractionListener {
         // TODO: Update argument type and name
 
     }

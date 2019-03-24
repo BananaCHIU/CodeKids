@@ -1,25 +1,19 @@
-package com.edu.codekids;
+package com.edu.codekids.Forum;
 
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.app.Activity;
-import android.app.Application;
 import android.content.Intent;
-import android.os.Parcelable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import com.edu.codekids.JavaForumFragment.OnJavaFragmentInteractionListener;
+import com.edu.codekids.Objects.Post;
+import com.edu.codekids.R;
 
 import org.ocpsoft.prettytime.PrettyTime;
 
-import java.io.Serializable;
-import java.security.CryptoPrimitive;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 

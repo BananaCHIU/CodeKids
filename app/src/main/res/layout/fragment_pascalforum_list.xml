@@ -11,6 +11,6 @@
         android:name="com.edu.codekids.PascalForumFragment"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        tools:context=".PascalForumFragment" />
+        tools:context=".Forum.PascalForumFragment" />
 
 </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>

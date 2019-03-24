@@ -1,4 +1,4 @@
-package com.edu.codekids;
+package com.edu.codekids.Forum;
 
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -7,6 +7,8 @@ import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
+import com.edu.codekids.Objects.Comment;
+import com.edu.codekids.R;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.firestore.FirebaseFirestore;

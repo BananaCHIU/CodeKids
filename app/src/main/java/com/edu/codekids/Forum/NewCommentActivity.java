@@ -1,4 +1,4 @@
-package com.edu.codekids;
+package com.edu.codekids.Forum;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
@@ -9,16 +9,18 @@ import android.graphics.Rect;
 import android.net.Uri;
 import android.os.Bundle;
 
+import com.edu.codekids.Objects.Comment;
+import com.edu.codekids.Objects.Post;
+import com.edu.codekids.Objects.User;
+import com.edu.codekids.R;
+import com.edu.codekids.SignedInActivity;
+import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
-import com.google.android.material.chip.Chip;
-import com.google.android.material.chip.ChipGroup;
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.android.material.snackbar.Snackbar;
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.Timestamp;
 import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.ml.vision.FirebaseVision;
 import com.google.firebase.ml.vision.common.FirebaseVisionImage;
@@ -26,7 +28,6 @@ import com.google.firebase.ml.vision.text.FirebaseVisionText;
 import com.google.firebase.ml.vision.text.FirebaseVisionTextRecognizer;
 import com.google.firebase.ml.vision.text.RecognizedLanguage;
 
-import androidx.annotation.IdRes;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
@@ -34,13 +35,11 @@ import androidx.core.content.FileProvider;
 
 import android.os.Environment;
 import android.provider.MediaStore;
-import android.text.method.ScrollingMovementMethod;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
-import android.widget.Scroller;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -49,131 +48,120 @@ import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 
-public class NewPostActivity extends AppCompatActivity {
+public class NewCommentActivity extends AppCompatActivity {
+
     private static final String TAG = "Message: ";
-    private static String lang = null;
-    private static User currentUser;
+    Post post;
+    User user;
+    List<Comment> comments = new ArrayList<Comment>();
+    EditText content;
+    TextView title;
+    ImageButton btn_cancel;
+    Button btn_post;
     static final int REQUEST_IMAGE_CAPTURE = 1;
     String currentPhotoPath;
     private Bitmap bitmap;
     private Uri photoURI;
-    EditText content;
-    //private Bitmap imageBitmap;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_new_post);
+        setContentView(R.layout.activity_new_comment);
+        post = (Post) getIntent().getSerializableExtra("post");
+        Toolbar toolbar = findViewById(R.id.toolbar);
+        btn_post = (Button) findViewById(R.id.button_post_cm);
+        btn_cancel = (ImageButton) findViewById(R.id.button_cancel_cm);
+        title = (TextView) findViewById(R.id.cmTitle);
+        content = (EditText) findViewById(R.id.inputCm);
 
-        ImageButton cancel = (ImageButton) findViewById(R.id.button_cancel);
-        Button postBtn = (Button) findViewById(R.id.button_post);
-        final EditText title = (EditText) findViewById(R.id.inputTitle);
-        ChipGroup chipGroup = (ChipGroup) findViewById(R.id.chip_group);
-        content = (EditText) findViewById(R.id.inputContent);
-
-        chipGroup.setOnCheckedChangeListener(new ChipGroup.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(ChipGroup chipGroup, int i) {
-
-                Chip chip = chipGroup.findViewById(i);
-                if (chip != null)
-                    lang = chip.getChipText().toString();
-            }
-        });
-        postBtn.setOnClickListener(new View.OnClickListener() {
+        btn_cancel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                cancelBtnClicked();
+            }
+        });
 
-                if(!((title.getText().toString().isEmpty()) || (content.getText().toString().isEmpty()) || (lang == null))){
-                    uploadPost(title, content);
-                }else {
-                    Toast.makeText(NewPostActivity.this, "Please Fill in All Fields", Toast.LENGTH_LONG).show();
+        btn_post.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                postBtnClicked();
+            }
+        });
+        title.setText(post.getpTitle());
+    }
+
+    public void postBtnClicked(){
+        if (content.getText().toString().isEmpty()){
+            Toast.makeText(this, "Please Fill in Your Comment", Toast.LENGTH_LONG).show();
+        } else uploadComment();
+    }
+
+    public void cancelBtnClicked(){
+        finish();
+    }
+
+    private void uploadComment(){
+        String lang = null;
+        if (post.getpLang().equals("Java")) lang = "javaPost";
+        else if(post.getpLang().equals("Pascal")) lang = "pascalPost";
+
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
+        DocumentReference docRef = db.collection(lang).document(post.getpId());
+        downloadComment(docRef);
+    }
+
+    private void addDocument(List<Comment> cm, DocumentReference docRef){
+        docRef.update("pComments", cm)
+                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void aVoid) {
+                        Log.d(TAG, "DocumentSnapshot successfully updated!");
+                        finish();
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Log.w(TAG, "Error updating document", e);
+                    }
+                });
+    }
+
+    private void downloadComment(final DocumentReference ref){
+        final List<Comment> cm = new ArrayList<Comment>();
+
+        ref.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                if (task.isSuccessful()) {
+                    DocumentSnapshot document = task.getResult();
+                    if (document.exists()) {
+                        cm.clear();
+                        ArrayList temp =(ArrayList) document.get("pComments");
+                        for (int i=0; i<temp.size(); i++){
+                            HashMap map = (HashMap) temp.get(i);
+                            HashMap uMap = (HashMap) map.get("cUser");
+                            User user = new User(uMap.get("uId").toString(),uMap.get("uName").toString(),uMap.get("uType").toString());
+                            Timestamp time = (Timestamp) map.get("cTime");
+                            cm.add(new Comment(user, map.get("cContent").toString(), time.toDate(), (int) (long) map.get("cVote")));
+                        }
+                        Date newTime = new Date();
+                        user = SignedInActivity.getCurrentuser();
+                        Comment add = new Comment(user, content.getText().toString(), newTime, 0 );
+                        cm.add(add);
+                        addDocument(cm,ref);
+                        Log.d(TAG, "DocumentSnapshot data: " + document.getData());
+                    } else {
+                        Log.d(TAG, "No such document");
+                    }
+                } else {
+                    Log.d(TAG, "get failed with ", task.getException());
                 }
             }
         });
-
-        cancel.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                finish();
-            }
-        });
-
-    }
-
-    private void uploadPost(TextView title, TextView content){
-        Date time = new Date();
-        currentUser = SignedInActivity.getCurrentuser();
-        List<Comment> comments = new ArrayList<Comment>();
-        Post post = new Post(currentUser, null,title.getText().toString(), content.getText().toString(),lang , time, comments);
-        addDocument(post);
-    }
-
-    private void addDocument(final Post post){
-        if (lang.equals("Java")) {
-            FirebaseFirestore db = FirebaseFirestore.getInstance();
-            db.collection("javaPost").add(post)
-                    .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
-                        @Override
-                        public void onSuccess(DocumentReference documentReference) {
-                            Log.d(TAG, "DocumentSnapshot written with ID: " + documentReference.getId());
-                            post.setpId(documentReference.getId());
-                            documentReference.update("pId", post.getpId())
-                                    .addOnSuccessListener(new OnSuccessListener<Void>() {
-                                        @Override
-                                        public void onSuccess(Void aVoid) {
-                                            Log.d(TAG, "DocumentSnapshot successfully updated!");
-                                        }
-                                    })
-                                    .addOnFailureListener(new OnFailureListener() {
-                                        @Override
-                                        public void onFailure(@NonNull Exception e) {
-                                            Log.w(TAG, "Error updating document", e);
-                                        }
-                                    });
-                            
-                            finish();
-                        }
-                    })
-                    .addOnFailureListener(new OnFailureListener() {
-                        @Override
-                        public void onFailure(@NonNull Exception e) {
-                            Log.w(TAG, "Error adding document", e);
-                        }
-                    });
-        }else if (lang.equals("Pascal")){
-            FirebaseFirestore db = FirebaseFirestore.getInstance();
-            db.collection("pascalPost").add(post)
-                    .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
-                        @Override
-                        public void onSuccess(DocumentReference documentReference) {
-                            Log.d(TAG, "DocumentSnapshot written with ID: " + documentReference.getId());
-                            post.setpId(documentReference.getId());
-                            documentReference.update("pId", post.getpId())
-                                    .addOnSuccessListener(new OnSuccessListener<Void>() {
-                                        @Override
-                                        public void onSuccess(Void aVoid) {
-                                            Log.d(TAG, "DocumentSnapshot successfully updated!");
-                                        }
-                                    })
-                                    .addOnFailureListener(new OnFailureListener() {
-                                        @Override
-                                        public void onFailure(@NonNull Exception e) {
-                                            Log.w(TAG, "Error updating document", e);
-                                        }
-                                    });
-                            finish();
-                        }
-                    })
-                    .addOnFailureListener(new OnFailureListener() {
-                        @Override
-                        public void onFailure(@NonNull Exception e) {
-                            Log.w(TAG, "Error adding document", e);
-                        }
-                    });
-        }
     }
 
     public void btnCameraClicked (View v){
@@ -196,7 +184,6 @@ public class NewPostActivity extends AppCompatActivity {
                 startActivityForResult(takePictureIntent, REQUEST_IMAGE_CAPTURE);
             }
         }
-
     }
 
     private File createImageFile() throws IOException {
@@ -290,4 +277,5 @@ public class NewPostActivity extends AppCompatActivity {
 
 
     }
+
 }
