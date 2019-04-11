@@ -12,6 +12,8 @@ import android.os.Bundle;
 import android.view.View;
 
 import com.edu.codekids.R;
+import com.viewpagerindicator.CirclePageIndicator;
+import com.viewpagerindicator.TitlePageIndicator;
 
 public class GameMainActivity extends AppCompatActivity {
 
@@ -83,6 +85,10 @@ public class GameMainActivity extends AppCompatActivity {
         mPager = findViewById(R.id.tPager);
         ScreenSlidePagerAdapter myAdapter = new ScreenSlidePagerAdapter(getSupportFragmentManager());
         mPager.setAdapter(myAdapter);
+
+        //Bind the title indicator to the adapter
+        CirclePageIndicator titleIndicator = (CirclePageIndicator)findViewById(R.id.indicator);
+        titleIndicator.setViewPager(mPager);
     }
 
     private class ScreenSlidePagerAdapter extends FragmentPagerAdapter {
