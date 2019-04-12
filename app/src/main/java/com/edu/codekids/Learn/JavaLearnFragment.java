@@ -38,7 +38,7 @@ public class JavaLearnFragment extends Fragment {
         });
 
         Button ch1 = view.findViewById(R.id.button_Ch1);
-        story.setOnClickListener(new View.OnClickListener() {
+        ch1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
