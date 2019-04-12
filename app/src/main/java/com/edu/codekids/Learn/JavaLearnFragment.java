@@ -27,14 +27,14 @@ public class JavaLearnFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
     {
         View view = inflater.inflate(R.layout.fragment_java_learn, container, false);
-        Button startButton = view.findViewById(R.id.java_ST_bytton);
+        /*Button startButton = view.findViewById(R.id.java_ST_bytton);
         startButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getContext(), GameMainActivity.class);
                 startActivity(intent);
             }
-        });
+        });*/
         return view;
     }
 
