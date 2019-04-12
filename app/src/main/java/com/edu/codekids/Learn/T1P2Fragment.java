@@ -15,10 +15,10 @@ import com.edu.codekids.R;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class T2Fragment extends Fragment {
+public class T1P2Fragment extends Fragment {
 
 
-    public T2Fragment() {
+    public T1P2Fragment() {
         // Required empty public constructor
     }
 
@@ -27,7 +27,7 @@ public class T2Fragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_t2, container, false);
+        return inflater.inflate(R.layout.fragment_t1_p2, container, false);
     }
 
 }

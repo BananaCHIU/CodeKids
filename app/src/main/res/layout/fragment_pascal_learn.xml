@@ -18,7 +18,7 @@
             android:layout_marginTop="8dp"
             android:layout_marginEnd="8dp"
             android:layout_marginBottom="8dp"
-            android:text="Comming Soon"
+            android:text="Coming Soon"
             android:textAlignment="center"
             android:textColor="@color/fui_bgFacebook"
             android:textSize="24sp"

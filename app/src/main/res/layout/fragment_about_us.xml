@@ -80,7 +80,8 @@
                 android:paddingTop="32dp"
                 android:text="Member: "
                 android:textAlignment="viewStart"
-                android:textSize="18sp" />
+                android:textSize="18sp"
+                android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/textView4"
@@ -92,8 +93,9 @@
                 android:paddingBottom="8dp"
                 android:text="Ho Chi Chiu Herman"
                 android:textAlignment="textStart"
-                android:textColor="@android:color/holo_orange_dark"
-                android:textSize="24sp" />
+                android:textColor="@android:color/holo_blue_dark"
+                android:textSize="24sp"
+                android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/textView6"
@@ -106,7 +108,8 @@
                 android:text="Lee Chun Yin Isaac"
                 android:textAlignment="textStart"
                 android:textColor="@android:color/holo_green_dark"
-                android:textSize="24sp" />
+                android:textSize="24sp"
+                android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/textView7"
@@ -119,7 +122,8 @@
                 android:text="Sin King Sing Kingston"
                 android:textAlignment="textStart"
                 android:textColor="@android:color/holo_red_light"
-                android:textSize="24sp" />
+                android:textSize="24sp"
+                android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/textView8"
@@ -132,7 +136,15 @@
                 android:text="Yeung Chung Shing Kirk"
                 android:textAlignment="textStart"
                 android:textColor="@android:color/holo_purple"
-                android:textSize="24sp" />
+                android:textSize="24sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/textView32"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="     "
+                android:textSize="36sp" />
 
         </LinearLayout>
     </ScrollView>

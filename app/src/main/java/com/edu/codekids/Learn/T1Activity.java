@@ -13,9 +13,8 @@ import android.view.View;
 
 import com.edu.codekids.R;
 import com.viewpagerindicator.CirclePageIndicator;
-import com.viewpagerindicator.TitlePageIndicator;
 
-public class GameMainActivity extends AppCompatActivity {
+public class T1Activity extends AppCompatActivity {
 
     private static final int NUM_PAGES = 2;
     /**
@@ -79,7 +78,7 @@ public class GameMainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_game_main);
+        setContentView(R.layout.activity_t1);
 
         // Instantiate a ViewPager and a PagerAdapter.
         mPager = findViewById(R.id.tPager);
@@ -101,9 +100,9 @@ public class GameMainActivity extends AppCompatActivity {
         public Fragment getItem(int position) {
             switch (position) {
                 case 0:
-                    return new T1Fragment();
+                    return new T1P1Fragment();
                 case 1:
-                    return new T2Fragment();
+                    return new T1P2Fragment();
             }
             return null;
         }
