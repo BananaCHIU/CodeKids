@@ -10,6 +10,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
 
 import com.edu.codekids.R;
 
@@ -27,14 +28,19 @@ public class JavaLearnFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
     {
         View view = inflater.inflate(R.layout.fragment_java_learn, container, false);
-        /*Button startButton = view.findViewById(R.id.java_ST_bytton);
-        startButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(getContext(), GameMainActivity.class);
-                startActivity(intent);
-            }
-        });*/
+        /*ImageView lock2 = view.findViewById(R.id.lock_2);
+        lock2.bringToFront();
+        ImageView lock3 = view.findViewById(R.id.lock_3);
+        lock3.bringToFront();
+        ImageView lock4 = view.findViewById(R.id.lock_4);
+        lock4.bringToFront();
+        ImageView lock5 = view.findViewById(R.id.lock_5);
+        lock5.bringToFront();
+        ImageView lock6 = view.findViewById(R.id.lock_6);
+        lock6.bringToFront();
+        ImageView lock7 = view.findViewById(R.id.lock_7);
+        lock7.bringToFront();*/
+
         return view;
     }
 
