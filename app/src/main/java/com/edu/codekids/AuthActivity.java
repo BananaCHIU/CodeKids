@@ -36,7 +36,9 @@ public class AuthActivity extends AppCompatActivity {
     private void buildAuthUI(){
         startActivityForResult(
                 // Get an instance of AuthUI based on the default app
-                AuthUI.getInstance().createSignInIntentBuilder().setAvailableProviders(Arrays.asList(
+                AuthUI.getInstance().createSignInIntentBuilder()
+                        .setIsSmartLockEnabled(false)
+                        .setAvailableProviders(Arrays.asList(
                         new AuthUI.IdpConfig.GoogleBuilder().build(),
                         new AuthUI.IdpConfig.EmailBuilder().build()))
                         .setLogo(R.drawable.ic_launcher_round)

@@ -58,16 +58,12 @@ public class SignedInActivity extends AppCompatActivity
         setContentView(R.layout.activity_signed_in);
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         if (user != null) {
-            for (UserInfo profile : user.getProviderData()) {
                 // Id of the provider (ex: google.com)
-                String providerId = profile.getProviderId();
                 uid = user.getUid();
-
                 // Name, email address, and profile photo Url
-                name = profile.getDisplayName();
-                email = profile.getEmail();
-                photoUrl = profile.getPhotoUrl();
-            }
+                name = user.getDisplayName();
+                email = user.getEmail();
+                photoUrl = user.getPhotoUrl();
         }
 
         currentuser = (User) getIntent().getSerializableExtra("currentuser");
