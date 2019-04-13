@@ -16,11 +16,21 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
+            android:name=".Learn.T1Q1Activity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:label="@string/title_activity_t1_q1"
+            android:parentActivityName=".Learn.T1Activity"
+            android:theme="@style/FullscreenTheme">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.edu.codekids.Learn.T1Activity" />
+        </activity>
+        <activity android:name=".Learn.T1Activity" />
+        <activity
             android:name=".Learn.StoryActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:label="@string/title_activity_story"
             android:theme="@style/FullscreenTheme"></activity>
-        <activity android:name=".Learn.T1Activity" />
         <activity
             android:name=".Forum.NewCommentActivity"
             android:label="@string/title_activity_new_comment"

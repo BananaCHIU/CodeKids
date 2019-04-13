@@ -75,5 +75,7 @@
     <string name="dummy_button">Dummy Button</string>
     <string name="dummy_content">DUMMY\nCONTENT</string>
 
+    <string name="title_activity_t1_q1">T1Q1Activity</string>
+
     <string name="title_activity_story">StoryActivity</string>
 </resources>
