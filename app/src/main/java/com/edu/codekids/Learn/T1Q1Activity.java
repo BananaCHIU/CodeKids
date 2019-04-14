@@ -2,22 +2,18 @@ package com.edu.codekids.Learn;
 
 import android.content.ClipData;
 import android.content.ClipDescription;
-import android.graphics.Canvas;
-import android.graphics.Color;
-import android.graphics.Point;
-import android.graphics.drawable.ColorDrawable;
-import android.graphics.drawable.Drawable;
+import android.media.MediaPlayer;
 import android.os.Bundle;
+import android.os.Handler;
 import android.util.Log;
 import android.view.DragEvent;
-import android.view.MotionEvent;
 import android.view.View;
-import android.view.ViewGroup;
-import android.widget.FrameLayout;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.edu.codekids.R;
 import com.google.android.material.chip.Chip;
 
@@ -29,14 +25,41 @@ public class T1Q1Activity extends AppCompatActivity {
     private static final String CHIP_TAG = "answer chip";
     String msg;
     Chip a1, a2;
+    private Handler mHandler = new Handler();
+    MediaPlayer myMus = null; // a field of MediaPlayer
+
+    @Override
+    protected void onResume(){ // callback method, active: when interacting with user
+        super.onResume(); // always call superclass
+        if (myMus != null) myMus.start(); // start playing
+    }
+    @Override
+    protected void onPause(){ // callback method, inactive: when no interacting
+        super.onPause(); // always call superclass
+        if (myMus != null) myMus.pause(); // pause playing
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_t1_q1);
 
-        a1 = (Chip) findViewById(R.id.chip_a1);
-        a2 = (Chip) findViewById(R.id.chip_a2);
+        myMus = MediaPlayer.create(this, R.raw.q1_bgm); // bg sound file “bs” in raw folder
+        myMus.setLooping(true); // set loop-playing mode
+
+        ImageView bg = findViewById(R.id.img_t1_bg);
+        ImageView pug = findViewById(R.id.img_pug);
+        Glide
+                .with(this)
+                .load(R.mipmap.pug_001)
+                .into(pug);
+        Glide
+                .with(this)
+                .load(R.mipmap.game_background)
+                        .into(bg);
+
+        a1 = findViewById(R.id.chip_a1);
+        a2 = findViewById(R.id.chip_a2);
         a1.setTag(CHIP_TAG);
         a2.setTag(CHIP_TAG);
         // Creates a new drag event listener
@@ -133,7 +156,6 @@ public class T1Q1Activity extends AppCompatActivity {
 
                 case DragEvent.ACTION_DRAG_STARTED:
 
-
                     return true;
 
                 case DragEvent.ACTION_DRAG_ENTERED:
@@ -145,7 +167,6 @@ public class T1Q1Activity extends AppCompatActivity {
 
                 case DragEvent.ACTION_DRAG_EXITED:
 
-
                     return true;
 
                 case DragEvent.ACTION_DROP:
@@ -155,15 +176,32 @@ public class T1Q1Activity extends AppCompatActivity {
                 case DragEvent.ACTION_DRAG_ENDED:
                     int x = (int) event.getX();
                     int y = (int) event.getY();
-                    TextView ans = (TextView) findViewById(R.id.T1Q1Ans);
+                    TextView ans = findViewById(R.id.T1Q1Ans);
                     int ansX = ans.getLeft();
                     int ansY = ans.getTop();
-                    if ((x <= ansX+100) || (x >= ansX-100)){
-                        if ((y <= ansY+100) || (x <= ansY-100)){
+                    if ((x <= ansX + 600) && (x >= ansX - 600)) {
+                        if ((y <= ansY + 300) && (x <= ansY - 300)) {
                             a1.setVisibility(View.INVISIBLE);
                             a2.setVisibility(View.INVISIBLE);
                             Chip c = (Chip)view;
-                            ans.setText(c.getText());
+                            String text = c.getText().toString();
+                            ans.setText(text);
+                            if (text.contains("Hi")){
+                                ImageView img = findViewById(R.id.img_conv);
+                                img.setImageResource(R.mipmap.conv_hi);
+                                Animation aniFade = AnimationUtils.loadAnimation(getApplicationContext(),R.anim.fade_in);
+                                img.startAnimation(aniFade);
+                            } else{
+                                ImageView img = findViewById(R.id.img_conv);
+                                img.setImageResource(R.mipmap.conv_name);
+                                Animation aniFade = AnimationUtils.loadAnimation(getApplicationContext(),R.anim.fade_in);
+                                img.startAnimation(aniFade);
+                            }
+                            mHandler.postDelayed(new Runnable() {
+                                public void run() {
+                                    finish();
+                                }
+                            }, 3000);
                         }
                     }
                     return true;

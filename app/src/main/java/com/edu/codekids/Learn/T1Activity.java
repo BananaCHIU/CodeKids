@@ -8,6 +8,7 @@ import androidx.fragment.app.FragmentPagerAdapter;
 import androidx.viewpager.widget.PagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.view.View;
 
@@ -27,6 +28,18 @@ public class T1Activity extends AppCompatActivity {
      * The pager adapter, which provides the pages to the view pager widget.
      */
     private PagerAdapter pagerAdapter;
+    MediaPlayer myMus = null; // a field of MediaPlayer
+
+    @Override
+    protected void onResume(){ // callback method, active: when interacting with user
+        super.onResume(); // always call superclass
+        if (myMus != null) myMus.start(); // start playing
+    }
+    @Override
+    protected void onPause(){ // callback method, inactive: when no interacting
+        super.onPause(); // always call superclass
+        if (myMus != null) myMus.pause(); // pause playing
+    }
 
     @Override
     public void onBackPressed() {
@@ -79,6 +92,9 @@ public class T1Activity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_t1);
+
+        myMus = MediaPlayer.create(this, R.raw.t1_bgm); // bg sound file “bs” in raw folder
+        myMus.setLooping(true); // set loop-playing mode
 
         // Instantiate a ViewPager and a PagerAdapter.
         mPager = findViewById(R.id.tPager);
