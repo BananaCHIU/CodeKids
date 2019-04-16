@@ -12,7 +12,7 @@
         android:layout_width="274dp"
         android:layout_height="wrap_content"
         android:elevation="10dp"
-        android:text="Once upon a time, a dog had get lost, its name is Woody. Woddy is finding its way to go back home. In order to do that, we have to complete some tasks. Let's do it and help Woody go home"
+        android:text="Once upon a time, a dog had get lost, its name is Doggy. Doggy is finding its way to go back home. In order to do that, we have to complete some tasks. Let's do it and help Doggy go home"
         android:textAlignment="center"
         android:textColor="@color/fui_bgGitHub"
         android:textSize="18sp"
